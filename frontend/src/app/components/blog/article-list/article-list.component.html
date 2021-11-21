@@ -1,0 +1,68 @@
+<div style="height:100vh;background-color:#f5f5f5" class="screen">
+    <div class="container">
+        <br>
+        <span class="title-page">Blog</span>
+        <hr>
+        <div class="row" style="margin-top:-10px">
+            <div class="col-lg-3">
+                <br>
+                <div class="card" >
+                    <div class="card-body">
+                        <h5 class="card-title">Caută</h5>
+                        <div class="input-group mb-3"><!-- [(ngModel)]="search" (keyup)="FilterArticles(search,this.tags)" -->
+                            <input  type="text" class="form-control" 
+                            placeholder="Caută articole"><!-- [(ngModel)]="userQuestion" (ngModelChange)="this.searchDebounce.next($event)" -->
+                        </div>
+
+                        <h5 class="card-title">Etichete:</h5>
+                        <form>
+                            <div *ngFor="let data of articlesTags">
+                                <input type="checkbox"> {{data}}<br> <!--  (change)="SearchByCheckbox(data)" -->
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+
+                <div *ngIf="articles.length!=0">
+                    <div *ngFor="let article of articles">
+                        <br>
+                        <div class="card article" ><!-- (click)="NavigateToArticle(article._id)" -->
+                            <h5 style="font-size: 1.25rem;text-align: center;margin-top:10px"> {{article.title}} </h5>
+    
+    <!-- ../../../assets/Limitator.png -->
+                            <div class="container" style="text-align:center;">
+                                <hr />
+                                <!-- <img class="stil" src="assets/Limitator.png" 
+                                    style="width:70%;margin-bottom:10px"> --><br>
+                            </div>
+                            <span class="p-3" [innerHTML]="article.content"></span>
+                            <span class="p-3"><b>Ultima actualizare: </b>{{article.last_update | date : 'dd MMM. yyyy, HH:mm'}}</span>
+                            <div class="row p-3">
+                                <div class="col-sm-6 ">
+                                    <i class="fas fa-tag" style="color:#1B315D" *ngIf="this.article.tags && this.article.tags.length!=0"><span
+                                            *ngFor="let tag of this.article.tags;let i=index">
+                                            {{tag}}<span *ngIf="i!=this.article.tags.length -1">, </span>
+                                        </span></i>
+                                </div>
+    
+                                <div class="col-sm-6">
+                                    <a style="color:#1B315D;float:right;font-weight: 600;">Citește tot articolul...</a>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                
+                <div *ngIf="articles.length==0" style="text-align:center">
+                    <h1>Momentan nu există niciun articol</h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
