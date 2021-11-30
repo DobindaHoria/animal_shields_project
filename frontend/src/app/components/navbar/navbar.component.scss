@@ -1,0 +1,59 @@
+.social-media-container {
+    height: 50px;
+    width: 100%;
+    background-color: #F17A32;
+    .right-side {
+        float: right;
+        display: flex;
+        margin-right: 40px;
+        .social-media-icon {
+            color: white;
+            font-size: 30px;
+            margin-left: 30px;
+        }
+        .social-media-icon:hover {
+            cursor: pointer;
+            color: black;
+        }
+        .phone-number {
+            color: white;
+            font-size: 20px;
+            margin-left: 30px;
+            margin-top: 8px;
+        }
+        .phone-number:hover {
+            cursor: pointer;
+            color: black;
+        }
+    }
+}
+
+.navbar {
+    .container-fluid {
+        background: white;
+    }
+    .logo {
+        max-height: 60px;
+    }
+    .nav-link {
+        color: #F17A32 !important;
+        font-size: 20px;
+    }
+    .nav-link.disabled {
+        color: gray !important;
+    }
+    .nav-link.active {
+        color: white !important;
+        background: #F17A32 !important;
+        border-radius: 20px;
+    }
+    .user-icon {
+        color: #F17A32;
+        font-size: 35px;
+    }
+    .form-select {
+        margin-left: 20px;
+        max-width: 100px !important;
+    }
+}
+

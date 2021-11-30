@@ -7,6 +7,9 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BlogComponent } from './pages/blog/blog.component';
 import { DonationComponent } from './pages/donation/donation.component';
 import { ArticleListComponent } from './components/blog/article-list/article-list.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { ArticleListComponent } from './components/blog/article-list/article-lis
     DashboardComponent,
     BlogComponent,
     DonationComponent,
-    ArticleListComponent
+    ArticleListComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
