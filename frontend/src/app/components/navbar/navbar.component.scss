@@ -51,6 +51,12 @@
         color: #F17A32;
         font-size: 35px;
     }
+    .nav-link:hover {
+        .user-icon{
+            color: black;
+            cursor: pointer;
+        }
+    }
     .form-select {
         margin-left: 20px;
         max-width: 100px !important;

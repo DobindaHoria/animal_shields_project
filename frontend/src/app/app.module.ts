@@ -10,6 +10,11 @@ import { ArticleListComponent } from './components/blog/article-list/article-lis
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './components/footer/footer.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule ,HttpClient} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,12 +24,17 @@ import { FooterComponent } from './components/footer/footer.component';
     DonationComponent,
     ArticleListComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent,
+    SignUpComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule 
+    FontAwesomeModule,
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
