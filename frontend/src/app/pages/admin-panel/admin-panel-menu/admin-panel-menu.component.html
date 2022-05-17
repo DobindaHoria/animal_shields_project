@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row ">
+        <!-- GENERAL SETTINGS -->
+        <div class="col-sm-6 col-md-4">
+            <div class="card" routerLink="/admin-panel-dashboard/general-settings">
+                <div class="div-card">
+                    <fa-icon [icon]="faSlidersH" [styles]="{'stroke': '#F17A32', 'color': '#F17A32'}" size="4x"></fa-icon>
+                    <br>
+                    <br>
+                    <h1>
+                        <b>General Settings</b>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <!-- DOGS -->
+        <div class="col-sm-6 col-md-4">
+            <div class="card" routerLink="/admin-panel-dashboard/dogs">
+                <div class="div-card">
+                    <fa-icon [icon]="faDog" [styles]="{'stroke': '#F17A32', 'color': '#F17A32'}" size="4x"></fa-icon>
+                    <br>
+                    <br>
+                    <h1>
+                        <b>Dogs</b>
+                    </h1>
+                    <h5 class="card-info">
+                        <!-- {{this.languageService.language.COMPANY_SETTINGS.MENU_CARDS.DEPARTMENTS_LABEL}} -->
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <!-- ARTICLES -->
+        <div class="col-sm-6 col-md-4">
+            <div class="card" routerLink="/admin-panel-dashboard/articles">
+                <div class="div-card">
+                    <fa-icon [icon]="faNewspaper" [styles]="{'stroke': '#F17A32', 'color': '#F17A32'}" size="4x"></fa-icon>
+                    <br>
+                    <br>
+                    <h1>
+                        <b>Articles</b>
+                    </h1>
+                    <h5 class="card-info"> <!-- {{this.languageService.language.COMPANY_SETTINGS.MENU_CARDS.USERS_LABEL}} -->
+                    </h5>
+                </div>
+            </div>
+        </div>
+        <!-- USERS -->
+        <div class="col-sm-6 col-md-4">
+            <div class="card" routerLink="/admin-panel-dashboard/users">
+                <div class="div-card">
+                    <fa-icon [icon]="faUsers" [styles]="{'stroke': '#F17A32', 'color': '#F17A32'}" size="4x"></fa-icon>
+                    <br>
+                    <br>
+                    <h1>
+                        <b>Users</b>
+                    </h1>
+                    <h5 class="card-info">
+                        <!-- {{this.languageService.language.COMPANY_SETTINGS.MENU_CARDS.APPS_LABEL}} -->
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

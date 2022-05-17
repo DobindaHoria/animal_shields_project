@@ -1,0 +1,43 @@
+.card:after {
+    i {
+        color: rgb(75, 75, 77) !important;
+    }
+    content: "";
+    display: block;
+    padding-bottom: 50%;
+    margin: 0 auto;
+
+}
+.card:hover {
+    i {
+        color: rgb(85, 85, 85) !important
+    }
+
+    cursor:pointer;
+    transform: scale(1.01);
+}
+.card {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border: solid black 1px;
+    text-align: center;
+    color: '#F17A32';
+    min-width: 300px;
+    min-height: 220px;
+}
+.card {
+    .div-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        color: black;
+        vertical-align: middle;
+    }
+}
+.card-info {
+    color: black;
+    font-size: 17px;
+}
+
