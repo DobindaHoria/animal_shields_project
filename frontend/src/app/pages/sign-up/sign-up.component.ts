@@ -19,6 +19,7 @@ export class SignUpComponent implements OnInit {
     name: '',
     email: '',
     password: '',
+    language: 'ro'
   }
 
   errorMessage = ''

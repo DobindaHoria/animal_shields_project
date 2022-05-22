@@ -15,9 +15,16 @@ export class LoginComponent implements OnInit {
     error: "",
   }
 
+  myselfModel: any = {
+    value: [],
+    message: "",
+    error: "",
+  }
+
   loginBody = {
-      email: '',
-      password: '',
+    email: 'paula.blaga1711@gmail.com',
+    password: 'zaq1@WSX',
+    language: 'ro'
   }
 
   errorMessage = ''
@@ -38,7 +45,29 @@ export class LoginComponent implements OnInit {
 
   onLogin = () => {
     if (!this.onValidateFields()) return
-    return this.requestService.requestPost(`${environment.apiUrl}/users/login`, this.loginModel, this.loginBody, {}, () => {})
+    return this.requestService.requestPost(`${environment.apiUrl}/users/login`, this.loginModel, this.loginBody, {}, () => {
+      if (this.loginModel.message.token) {
+        localStorage.setItem('accessToken', this.loginModel.message.token)
+        this.onGetMyself(this.loginModel.message.token)
+      }
+    })
+  }
+
+  onGetMyself = (token: string) => {
+    return this.requestService.requestGet(`${environment.apiUrl}/users/myself`, this.myselfModel, { "Authorization": `Bearer ${token}` }, () => {
+      if (this.myselfModel.value.user) {
+        localStorage.setItem('email', this.myselfModel.value.user.email)
+        localStorage.setItem('name', this.myselfModel.value.user.name)
+        localStorage.setItem('role', this.myselfModel.value.user.role)
+        localStorage.setItem('myID', this.myselfModel.value.user._id)
+
+        if(this.myselfModel.value.user.role === 'admin') {
+          window.location.href =  window.location.origin + '/admin-panel-dashboard'
+        } else {
+          window.location.href =  window.location.origin + '/dashboard'
+        }
+      }
+    })
   }
 
 }

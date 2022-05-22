@@ -40,8 +40,14 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <a class="nav-link" href="login" aria-disabled="true">
+                <a class="nav-link" *ngIf="!accessToken" href="login" aria-disabled="true">
                     <fa-icon [icon]="faUser" class="user-icon"></fa-icon>
+                </a>
+                <a class="nav-link name-link" *ngIf="accessToken" aria-disabled="true" (click)="onLogout()">
+                    <span class="name">
+                        <span>{{myName}}</span>
+                    </span>
+                    <fa-icon [icon]="faSignOutAlt" class="user-icon"></fa-icon>
                 </a>
                 <select class="form-select">
                     <option value="ro" selected>RO <img src="../../assets/ro_flag.png"></option>

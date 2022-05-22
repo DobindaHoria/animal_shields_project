@@ -38,6 +38,17 @@
     .nav-link {
         color: #F17A32 !important;
         font-size: 20px;
+        &.name-link {
+            min-width: 250px;
+            .name {
+                margin-right: 30px
+            }
+        }
+        &.name-link:hover {
+            .name {
+                color: black
+            }
+        }
     }
     .nav-link.disabled {
         color: gray !important;

@@ -20,6 +20,7 @@ import { AdminPanelDogsComponent } from './pages/admin-panel/admin-panel-dogs/ad
 import { AdminPanelUsersComponent } from './pages/admin-panel/admin-panel-users/admin-panel-users.component';
 import { AdminPanelGeneralSettingsComponent } from './pages/admin-panel/admin-panel-general-settings/admin-panel-general-settings.component';
 import { AdminPanelArticlesComponent } from './pages/admin-panel/admin-panel-articles/admin-panel-articles.component';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { AdminPanelArticlesComponent } from './pages/admin-panel/admin-panel-art
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

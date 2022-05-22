@@ -17,14 +17,14 @@ export class RequestService {
 
   constructor(private http: HttpClient) { }
 
-  requestGet<T>(url:string, model:object, headers = {}, callback:any = null, meta = { loading: "Loading", empty: "No results" }) {
+  requestGet<T>(url: string, model: object, headers = {}, callback: any = null, meta = { loading: "Loading", empty: "No results" }) {
     return new Observable(observer => {
 
       observer.next({ message: meta.loading });
 
       this.http.get<T>(url, { headers: new HttpHeaders(headers) })
         .subscribe(
-          (response:any) => {
+          (response: any) => {
             if (response['status'] === 'error')
               observer.error(response['message'].toString());
 
@@ -49,7 +49,7 @@ export class RequestService {
       )
   }
 
-  requestPost<T>(url: string, model:object, body:any, headers:any, callback:any = null,config:any = { bodyType: BodyTypes.JSON, images: [{ name: "", file: null }] }, meta = { loading: "Loading", empty: "No results" }) {
+  requestPost<T>(url: string, model: object, body: any, headers: any, callback: any = null, config: any = { bodyType: BodyTypes.JSON, images: [{ name: "", file: null }] }, meta = { loading: "Loading", empty: "No results" }) {
     return new Observable(observer => {
 
       observer.next({ message: meta.loading });
@@ -63,14 +63,14 @@ export class RequestService {
         /* if (config.image.name !== "" && config.image.file !== null)
           formData.append(config.image.name, config.image.file); */
 
-          for(let img of config.images){
-            if (img.name !== "" && img.file !== null){
-              for(let file of img.file){
-              
-                formData.append(img.name,file.imageFile);
-              }
+        for (let img of config.images) {
+          if (img.name !== "" && img.file !== null) {
+            for (let file of img.file) {
+
+              formData.append(img.name, file.imageFile);
             }
           }
+        }
 
         requestBody = formData;
 
@@ -89,7 +89,7 @@ export class RequestService {
       );
   }
 
-  requestPut<T>(url:string, model:object, body:any, headers:any, callback:any = null, config:any = { bodyType: BodyTypes.JSON, image: { name: "", file: null } }, meta = { loading: "Loading", empty: "No results" }) {
+  requestPut<T>(url: string, model: object, body: any, headers: any, callback: any = null, config: any = { bodyType: BodyTypes.JSON, image: { name: "", file: null } }, meta = { loading: "Loading", empty: "No results" }) {
     return new Observable(observer => {
 
       observer.next({ message: meta.loading });
@@ -120,7 +120,7 @@ export class RequestService {
       );
   }
 
-  requestDelete<T>(url:string, model:object, headers:any, callback:any = null, meta = { loading: "Loading", empty: "No results" }) {
+  requestDelete<T>(url: string, model: object, headers: any, callback: any = null, meta = { loading: "Loading", empty: "No results" }) {
     return new Observable(observer => {
 
       observer.next({ message: meta.loading });
@@ -140,7 +140,8 @@ export class RequestService {
   }
 
   //#region Auxiliare
-  private ProcessMessageResponse(response:any, observer:any) {
+  private ProcessMessageResponse(response: any, observer: any) {
+
     if (response['status'] === 'error')
       if ('conflict' in response)
         observer.error({ message: response['message'].toString(), conflict: response['conflict'] });
@@ -148,14 +149,18 @@ export class RequestService {
         observer.error(response['message'].toString());
 
     else if (response['status'] === 'warning')
-      observer.next({ message: response['message'].toString() });
+      observer.next({ message: response.toString() });
 
     else {
       //if status==="success"
-      observer.next({ message: response['message'].toString() });
+      if (!response['message']) {
+        observer.next({ message: response })
+      } else {
+        observer.next({ message: response['message'].toString() });
+      }
     }
   }
-  private SaveError(error:any, method:any, request: { url: string, headers: any, body?: any }) {
+  private SaveError(error: any, method: any, request: { url: string, headers: any, body?: any }) {
     let obj = {
       slug: `${location.pathname.split('/')[1]}`,
       user_id: `${this.userID}`,
@@ -180,7 +185,7 @@ export class RequestService {
 
     let u = new URL(request.url);
 
-    obj.url.path =`${u.origin}${u.pathname}`
+    obj.url.path = `${u.origin}${u.pathname}`
     obj.url.params = this.getQueryStringParams(u.search);
 
     console.log(obj)
@@ -193,11 +198,11 @@ export class RequestService {
     localStorage.setItem('eroare', JSON.stringify(obj));
   }
 
-  private getQueryStringParams(query:any) {
+  private getQueryStringParams(query: any) {
     return query
       ? (/^[?#]/.test(query) ? query.slice(1) : query)
         .split('&')
-        .reduce((params:any, param:any) => {
+        .reduce((params: any, param: any) => {
           let [key, value] = param.split('=');
           params[key] = value ? decodeURIComponent(value.replace(/\+/g, ' ')) : '';
           return params;
@@ -205,7 +210,7 @@ export class RequestService {
         )
       : {}
   };
-  private DataToModel(data:any, model:any, hasValue = false) {
+  private DataToModel(data: any, model: any, hasValue = false) {
 
     model.message = "";
     model.error = "";
@@ -219,7 +224,7 @@ export class RequestService {
     }
 
   }
-  private ErrorToModel(error:any, model:any) {
+  private ErrorToModel(error: any, model: any) {
 
     if ('value' in model) {
       model['value'] = null;
@@ -231,7 +236,7 @@ export class RequestService {
     else
       model.message = error;
 
-  
+
   }
 
   private handleError(error: any) {
@@ -248,7 +253,7 @@ export class RequestService {
   }
 
 
-  ObjectToFormdata(formData:any, data:any, parentKey:any = null) {
+  ObjectToFormdata(formData: any, data: any, parentKey: any = null) {
     if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
       Object.keys(data).forEach(key => {
         this.ObjectToFormdata(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
@@ -261,10 +266,10 @@ export class RequestService {
 
 
   }
-  append(fd: FormData, dob:any, fob:any = null, p: string = '') {
+  append(fd: FormData, dob: any, fob: any = null, p: string = '') {
     let apnd = this.append;
 
-    function isObj(dob:any, fob:any, p:any) {
+    function isObj(dob: any, fob: any, p: any) {
       if (typeof dob == "object") {
         if (!!dob && dob.constructor === Array) {
           p += '[]';
