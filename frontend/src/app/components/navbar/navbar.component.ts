@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit {
 
   myName: any
   accessToken: any
+  languageCode: any
+
   constructor() { }
 
   ngOnInit(): void {
@@ -25,6 +27,9 @@ export class NavbarComponent implements OnInit {
     }
     if (localStorage.getItem('accessToken')) {
       this.accessToken = localStorage.getItem('accessToken')
+    }
+    if (localStorage.getItem('languageCode')) {
+      this.languageCode = localStorage.getItem('languageCode')
     }
   }
 
@@ -37,5 +42,11 @@ export class NavbarComponent implements OnInit {
     this.myName = ''
     this.accessToken = ''
     window.location.href = window.location.origin + '/login'
+  }
+
+  onChangeLanguage(event: any) {
+    if (!event.target.value) return
+    this.languageCode = event.target.value
+    localStorage.setItem('languageCode', event.target.value)
   }
 }

@@ -49,8 +49,8 @@
                     </span>
                     <fa-icon [icon]="faSignOutAlt" class="user-icon"></fa-icon>
                 </a>
-                <select class="form-select">
-                    <option value="ro" selected>RO <img src="../../assets/ro_flag.png"></option>
+                <select class="form-select" [(ngModel)]="languageCode" (change)="onChangeLanguage($event)" >
+                    <option value="ro">RO <img src="../../assets/ro_flag.png"></option>
                     <option value="en">EN <img src="../../assets/en_flag.png"></option>
                 </select>
             </form>

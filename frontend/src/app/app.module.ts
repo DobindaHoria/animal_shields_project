@@ -17,10 +17,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule ,HttpClient} from "@angular/common/http";
 import { AdminPanelMenuComponent } from './pages/admin-panel/admin-panel-menu/admin-panel-menu.component';
 import { AdminPanelDogsComponent } from './pages/admin-panel/admin-panel-dogs/admin-panel-dogs.component';
-import { AdminPanelUsersComponent } from './pages/admin-panel/admin-panel-users/admin-panel-users.component';
 import { AdminPanelGeneralSettingsComponent } from './pages/admin-panel/admin-panel-general-settings/admin-panel-general-settings.component';
 import { AdminPanelArticlesComponent } from './pages/admin-panel/admin-panel-articles/admin-panel-articles.component';
 import { AuthService } from './services/auth.service';
+import { CreateUserComponent } from './pages/admin-panel/admin-panel-users/create-user/create-user.component';
+import { UpdateUserComponent } from './pages/admin-panel/admin-panel-users/update-user/update-user.component';
+import { UsersListComponent } from './pages/admin-panel/admin-panel-users/users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -36,9 +38,11 @@ import { AuthService } from './services/auth.service';
     ForgotPasswordComponent,
     AdminPanelMenuComponent,
     AdminPanelDogsComponent,
-    AdminPanelUsersComponent,
     AdminPanelGeneralSettingsComponent,
     AdminPanelArticlesComponent,
+    CreateUserComponent,
+    UpdateUserComponent,
+    UsersListComponent,
   ],
   imports: [
     BrowserModule,

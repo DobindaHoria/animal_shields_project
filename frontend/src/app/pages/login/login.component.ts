@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('name', this.myselfModel.value.user.name)
         localStorage.setItem('role', this.myselfModel.value.user.role)
         localStorage.setItem('myID', this.myselfModel.value.user._id)
-
+        localStorage.setItem('languageCode', 'ro')
         if(this.myselfModel.value.user.role === 'admin') {
           window.location.href =  window.location.origin + '/admin-panel-dashboard'
         } else {

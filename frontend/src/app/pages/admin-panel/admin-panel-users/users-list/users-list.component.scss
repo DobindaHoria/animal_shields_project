@@ -1,0 +1,144 @@
+.btn-warning{
+    background-color:#eb9e35 !important;
+}
+
+.btn-warning:hover{
+    background-color: rgb(75, 75, 77) !important;
+}
+
+.btn-warning{
+    background-color:#eb9e35 !important;
+}
+
+
+.dep-item{
+    margin-top:15px;
+}
+
+i:hover{
+    cursor:pointer;
+    color:#eb9e35
+}
+
+.dep-name{
+    margin-left:20px;
+    margin: 0 0 0 20px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.margin-categ{
+    margin-left:40px;
+    margin-top:20px;
+}
+
+.category-card{
+    margin-top:15px;
+}
+
+.withNoCatorSubcat{
+    margin-top:21.5px !important;
+}
+
+.addPosition{
+    float:right;margin-right:20px;font-size:22px;margin-top:-3.5px
+}
+
+.addPosition:hover{
+    cursor:pointer;
+    color:#eb9e35
+}
+
+::-webkit-input-placeholder {
+    font-style: italic;
+    font-size:14px;
+    margin-top:-2px;
+ }
+ :-moz-placeholder {
+    font-style: italic;  
+    font-size:14px;
+    margin-top:-2px;
+ }
+ ::-moz-placeholder {
+    font-style: italic; 
+    font-size:14px; 
+    margin-top:-2px;
+ }
+ :-ms-input-placeholder {  
+    font-style: italic; 
+    font-size:14px;
+    margin-top:-2px;
+ }
+
+ .viewProfile{
+    margin:10px 20px 20px 20px;
+    padding:20px
+ }
+
+ .pointer:hover{
+   cursor: pointer;
+ }
+ .slider {
+    position: absolute;
+    cursor: pointer;
+    top: -7px;
+    left: 0;
+    right: 0;
+    bottom: 4px;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #1B315D;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #1B315D;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+ 
+  .switch-toggle {
+    float: left;
+    background: #242729;
+ }
+ .switch-toggle input {
+   position: absolute;
+   opacity: 0;
+ }
+ .switch-toggle input + label {
+   padding: 7px;
+   float:left;
+   color: #fff;
+   cursor: pointer;
+ }
+ .switch-toggle input:checked + label {
+   background: #1B315D;
+ }
