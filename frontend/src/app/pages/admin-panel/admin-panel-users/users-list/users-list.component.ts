@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestService } from '../../../../services/request.service'
 import { environment } from '../../../../../../src/environments/environment';
+declare var $: any;
 
 @Component({
   selector: 'app-users-list',
@@ -38,6 +39,14 @@ export class UsersListComponent implements OnInit {
     error: "",
     value: null
   }
+
+  deleteUserModel: any = {
+    message: "",
+    error: "",
+    value: null
+  }
+
+  selectedUserID: any = ''
 
   constructor(
     private location: Location,
@@ -103,6 +112,20 @@ export class UsersListComponent implements OnInit {
   getUserById(userID: string) {
     if (!userID) return
     return this.requestService.requestGet(`${environment.apiUrl}/users/${userID}?language=${this.language || 'ro'}`, this.userByIDModel, { "Authorization": `Bearer ${this.token}` })
+  }
+
+  onDeleteUser() {
+    if (!this.selectedUserID) return
+    return this.requestService.requestDelete(`${environment.apiUrl}/users/${this.selectedUserID}`, this.deleteUserModel, { "Authorization": `Bearer ${this.token}` }, () => {
+      if (this.deleteUserModel.message === 'Procesul a fost executat cu succes' || this.deleteUserModel.message === 'Process completed successfully.') {
+        this.selectedUserID = ''
+        setTimeout(() => {
+          $('#deleteUserModal').modal('hide');
+          this.getUsers()
+          this.deleteUserModel.message = ''
+        }, 1500)
+      }
+    })
   }
 
 }

@@ -28,15 +28,17 @@
                 <div class="col-sm-6">
                     <h5>Nume:</h5>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name='lastName' placeholder="ex: Doe" [(ngModel)]="search.lastName"
-                            (ngModelChange)="onSearch()" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" name='lastName' placeholder="ex: Doe"
+                            [(ngModel)]="search.lastName" (ngModelChange)="onSearch()"
+                            [ngModelOptions]="{standalone: true}">
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <h5>Prenume:</h5>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="ex: John" name='firstName' [(ngModel)]="search.firstName"
-                            (ngModelChange)="onSearch()" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" placeholder="ex: John" name='firstName'
+                            [(ngModel)]="search.firstName" (ngModelChange)="onSearch()"
+                            [ngModelOptions]="{standalone: true}">
                     </div>
                 </div>
 
@@ -72,13 +74,14 @@
                             <h5><b>{{user.name}}</b></h5>
                         </div>
                         <div class="col-1">
-                            <span (click)="getUserById(user._id)" data-bs-toggle="modal" data-bs-target="#viewDetails"
+                            <span (click)="getUserById(user._id)" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 style="font-size:16px;font-weight:700;cursor:pointer;color:#71868a">
                                 Vezi detalii
                             </span>
                         </div>
                         <div class="col-1">
-                            <span data-toggle="modal" *ngIf="role==='admin'" data-target="#DeleteUserWarning"
+                            <span *ngIf="role==='admin'" (click)="this.selectedUserID=user?._id" data-bs-toggle="modal"
+                                data-bs-target="#deleteUserModal"
                                 style="font-size:16px;font-weight:700;cursor:pointer;color:#e2341d">
                                 Șterge
                             </span>
@@ -89,197 +92,70 @@
         </div>
     </div>
 
-    <!-- VIEW -->
-
-    <div class="modal fade bd-example-modal-lg" id="viewDetails" tabindex="-1" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <!-- VIEW DETAILS USER MODAL -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="detailUserModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        Detalii utilizator:</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title" id="detailUserModal">Detalii Utilizator</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="card viewProfile" *ngIf="userByIDModel?.value?.user">
-                    <h5 style="font-size:20px;color:grey;margin-top:15px">
-                        Email:
-                        <span style="font-size:25px;color:black">
-                            {{userByIDModel.value.user.email}}
-                        </span>
-                    </h5>
-                    <h5 style="font-size:20px;color:grey;margin-top:15px">
-                        Nume:
-                        <span style="font-size:25px;color:black">
-                            {{userByIDModel.value.user.name}}
-                        </span>
-                    </h5>
-                    <h5 style="font-size:20px;color:grey;margin-top:15px">
-                        Rol:
-                        <span style="font-size:25px;color:black;text-transform: capitalize;margin-top:10px">
-                            {{userByIDModel.value.user.role}}
-                        </span>
-                    </h5>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DEACTIVATE USER -->
-    <!-- <div class="modal fade" id="DeactivateUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    {{this.languageService.language.COMPANY_SETTINGS.USERS.DEACTIVATE_USER_MODAL_TITLE}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-
-                {{this.languageService.language.COMPANY_SETTINGS.USERS.DEACTIVATE_USER_MODAL_CONTENT}}
-
-                <br>
-
-                <div class="alert alert-danger"
-                    *ngIf="this.updateUserModel.error.tickets || this.updateUserModel.error.categories"
-                    style="margin-top:10px">
-                    {{this.languageService.language.COMPANY_SETTINGS.USERS.DEACTIVATE_USER_MODAL_ERROR_1}} <b
-                        class="pointer"
-                        (click)="ShowCategoriesOrTicketsForDeactivate()">{{this.languageService.language.COMPANY_SETTINGS.USERS.DEACTIVATE_USER_MODAL_ERROR_2}}</b>
-                    {{this.languageService.language.COMPANY_SETTINGS.USERS.DEACTIVATE_USER_MODAL_ERROR_3}}
-                </div>
-
-                <div class="alert alert-danger"
-                    *ngIf="!this.updateUserModel.error.tickets && !this.updateUserModel.error.categories && this.updateUserModel.error"
-                    style="margin-top:10px">
-                    {{this.updateUserModel.error}}
-                </div>
-
-            </div>
-
-
-
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                    data-dismiss="modal">{{this.languageService.language.COMPANY_SETTINGS.USERS.DEACTIVATE_USER_MODAL_NO}}</button>
-                <button type="button" class="btn btn-primary"
-                    (click)="ActiveDeactiveUser(this.user,this.user.active)">{{this.languageService.language.COMPANY_SETTINGS.USERS.DEACTIVATE_USER_MODAL_YES}}</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-    <!-- ACTIVATE USER -->
-    <!-- <div class="modal fade" id="ActivateUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                    {{this.languageService.language.COMPANY_SETTINGS.USERS.ACTIVATE_USER_MODAL_TITLE}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-
-                {{this.languageService.language.COMPANY_SETTINGS.USERS.ACTIVATE_USER_MODAL_CONTENT}}
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                    data-dismiss="modal">{{this.languageService.language.COMPANY_SETTINGS.USERS.ACTIVATE_USER_MODAL_NO}}</button>
-                <button type="button" class="btn btn-primary"
-                    (click)="ActiveDeactiveUser(this.user,this.user.active)">{{this.languageService.language.COMPANY_SETTINGS.USERS.ACTIVATE_USER_MODAL_YES}}</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-    <!-- SHOWCATEGORIESOFTICKETS -->
-    <!-- <div class="modal fade" id="categoryAndTickets" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">
-                    <b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_TITLE}}</b>
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body" style="max-height: calc(100vh - 200px);
-              overflow-y: auto;">
-
-                <div *ngIf="updateUserModel.error.tickets">
-                    <h5><b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_TICKETS}}:</b>
-                    </h5>
-
-                    <div class="card" *ngFor="let ticket of updateUserModel.error.tickets" style="margin-top:10px">
-                        <div class="row" style="padding:5px;margin-top:5px">
-                            <div class="col-6">
-                                <h5><b>{{ticket.title}}</b></h5>
-                            </div>
-                            <div class="col-6">
-                                <i style="font-size:24px" class="fas fa-eye" (click)="NavigateToTicket(ticket._id)"
-                                    style="float:right;margin-right: 20px;
-                      font-size: 24px;"></i>
-                            </div>
-                        </div>
-
+                <div class="modal-body">
+                    <div class="card viewProfile" *ngIf="userByIDModel?.value?.user">
+                        <h5 style="font-size:20px;color:grey;margin-top:15px">
+                            Email:
+                            <span style="font-size:25px;color:black">
+                                {{userByIDModel.value.user.email}}
+                            </span>
+                        </h5>
+                        <h5 style="font-size:20px;color:grey;margin-top:15px">
+                            Nume:
+                            <span style="font-size:25px;color:black">
+                                {{userByIDModel.value.user.name}}
+                            </span>
+                        </h5>
+                        <h5 style="font-size:20px;color:grey;margin-top:15px">
+                            Rol:
+                            <span style="font-size:25px;color:black;text-transform: capitalize;margin-top:10px">
+                                {{userByIDModel.value.user.role}}
+                            </span>
+                        </h5>
                     </div>
                 </div>
-
-                <div *ngIf="updateUserModel.error.categories">
-                    <h5><b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_CATEGORIES}}:</b>
-                    </h5>
-
-                    <div class="card" *ngFor="let category of updateUserModel.error.categories">
-                        <div style="padding:10px">
-                            <h5><b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_CATEGORIES_NAME}}:
-                                </b>{{category.name}}</h5>
-
-                            <h5 *ngFor="let department of this.companyDetails.value.departments"
-                                [hidden]="department._id!=category.department">
-                                <b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_CATEGORIES_DEPARTMENT}}:
-                                </b> {{department.name}}
-                            </h5>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-secondary"
-                    data-dismiss="modal">{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_CLOSE}}</button>
-
             </div>
         </div>
     </div>
-</div> -->
 
+    <!-- DELETE USER MODAL -->
+    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteUserModal">Detalii Utilizator</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Ești sigur că dorești să ștergi acest utilizator?</p>
+                </div>
+
+                <div class="alert alert-success" role="alert" *ngIf="this.deleteUserModel.message">
+                    {{this.deleteUserModel.message}}
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
+                    <button type="button" class="btn btn-danger" (click)="onDeleteUser()">Șterge</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- DELETE USER WARNING -->
-    <!-- <div class="modal fade" id="DeleteUserWarning" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- <div class="modal fade" id="DeleteUserWarning" tabindex="-1" role="dialog" aria-labelledby="detailUserModal"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
+                <h5 class="modal-title" id="detailUserModal">
                     {{this.languageService.language.COMPANY_SETTINGS.USERS.DELETE_USER_MODAL_TITLE}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -316,75 +192,6 @@
                     {{this.languageService.language.COMPANY_SETTINGS.USERS.DELETE_USER_MODAL_ERROR_NO}}</button>
                 <button type="button" class="btn btn-primary" (click)="DeleteUser()">
                     {{this.languageService.language.COMPANY_SETTINGS.USERS.DELETE_USER_MODAL_ERROR_YES}}</button>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-    <!-- DELETE USER CATEGORIES AND TICKETS -->
-    <!-- <div class="modal fade" id="DeleteUserCategoryAndTickets" tabindex="-1" role="dialog"
-    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">
-                    <b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_TITLE}}</b>
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-
-            <div class="modal-body" style="max-height: calc(100vh - 200px);
-            overflow-y: auto;">
-
-                <div *ngIf="deleteUser.error.tickets">
-                    <h5><b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_TICKETS}}:</b>
-                    </h5>
-
-                    <div class="card" *ngFor="let ticket of deleteUser.error.tickets" style="margin-top:10px">
-                        <div class="row" style="padding:5px;margin-top:5px">
-                            <div class="col-6">
-                                <h5><b>{{ticket.title}}</b></h5>
-                            </div>
-                            <div class="col-6">
-                                <i style="font-size:24px" class="fas fa-eye" (click)="NavigateToTicket(ticket._id)"
-                                    style="float:right;margin-right: 20px;
-                    font-size: 24px;"></i>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div *ngIf="deleteUser.error.categories">
-                    <h5><b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_CATEGORIES}}:</b>
-                    </h5>
-
-                    <div class="card" *ngFor="let category of deleteUser.error.categories">
-                        <div style="padding:10px">
-                            <h5><b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_CATEGORIES_NAME}}:
-                                </b>{{category.name}}</h5>
-
-                            <h5 *ngFor="let department of this.companyDetails.value.departments"
-                                [hidden]="department._id!=category.department">
-                                <b>{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_CATEGORIES_DEPARTMENT}}:
-                                </b> {{department.name}}
-                            </h5>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-secondary"
-                    data-dismiss="modal">{{this.languageService.language.COMPANY_SETTINGS.USERS.SHOW_CATEGORIES_MODAL_CLOSE}}</button>
-
             </div>
         </div>
     </div>
