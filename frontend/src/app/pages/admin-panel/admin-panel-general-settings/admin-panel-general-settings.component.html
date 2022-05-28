@@ -1,1 +1,132 @@
-<p>admin-panel-general-settings works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2 style="margin-left: auto;margin-right: auto;margin-top:20px;">
+                Setări Generale
+            </h2>
+        </div>
+        <div class="col">
+            <button type="button back-btn"
+                style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer"
+                class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
+                Înapoi
+            </button>
+        </div>
+    </div>
+    <hr style="background-color: black ">
+    <div class="card" *ngIf=" this.settingsModel.value">
+        <h5>Roluri Utilizatori</h5>
+        <hr />
+        <ul *ngIf="this.settingsModel?.value?.User_Roles">
+            <li *ngFor="let role of this.settingsModel?.value?.User_Roles">
+                {{role}}
+            </li>
+        </ul>
+        <h5>Limbi Disponibile</h5>
+        <ul *ngIf="this.settingsModel?.value?.Available_Languages">
+            <li *ngFor="let language of this.settingsModel?.value?.Available_Languages">
+                {{language?.name}}
+            </li>
+        </ul>
+        <hr />
+        <h5>Etichete Articole</h5>
+        <div *ngFor="let languageTags of this.settingsModel?.value?.Article_tags">
+            <div class="card">
+                <div>
+                    <h5>{{languageTags.language}}</h5>
+                </div>
+                <div>
+                    <b>Etichete:</b>
+                    <br />
+                    <br />
+                    <div *ngIf="languageTags.language === 'ro'">
+                        <div *ngFor="let tag of arrayOfROTags" style="height: 50px; width: 300px;">
+                            <span>
+                                {{tag}}
+                            </span>
+                            <span>
+                                <!-- <button class="btn btn-danger"
+                                    style="float: right; background: #F17A32;margin-left: 10px;" data-bs-toggle="modal"
+                                    data-bs-target="#editTagModal" (click)="onOpenEditModalTag(tag, i, 'ro')">Editează</button> -->
+                                <button class="btn btn-danger" style="float: right">Șterge</button>
+                            </span>
+                        </div>
+                        <div>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editTagModal"
+                                (click)="onOpenEditModalTag('', 0, 'ro')">Adaugă Etichetă</button>
+                        </div>
+                    </div>
+                    <div *ngIf="languageTags.language === 'gb'">
+                        <div *ngFor="let tag of arrayOfENTags;let i=index" style="height: 50px; width: 300px;">
+                            <span>
+                                {{tag}}
+                            </span>
+                            <span>
+                                <!-- <button class="btn btn-danger"
+                                    style="float: right; background: #F17A32;margin-left: 10px;" data-bs-toggle="modal"
+                                    data-bs-target="#editTagModal" (click)="onOpenEditModalTag(tag, i, 'gb')">Editează</button> -->
+                                <button class="btn btn-danger" style="float: right">Șterge</button>
+                            </span>
+                        </div>
+                        <div>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editTagModal"
+                                (click)="onOpenEditModalTag('', 0, 'gb')">Adaugă Etichetă</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+</div>
+
+<!--ADD TAG -->
+<div class="modal fade" id="editTagModal" tabindex="-1" aria-labelledby="editTagModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTagModal">Editează etichetă</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label>Nume etichetă:</label>
+                <br />
+                <input type="text" class="form-control" name='tagName' placeholder="ex: Tag"
+                    [(ngModel)]="selectedTag.name" [ngModelOptions]="{standalone: true}" />
+            </div>
+
+            <div class="alert alert-success" role="alert" *ngIf="this.updateSettingsModel.message">
+                {{this.updateSettingsModel.message}}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
+                <button type="button" class="btn btn-success" (click)="onUpdateTags()">Salvează</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE USER MODAL -->
+<!-- <div class="modal fade" id="editTagModal" tabindex="-1" aria-labelledby="editTagModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTagModal">Detalii Utilizator</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Ești sigur că dorești să ștergi acest utilizator?</p>
+            </div>
+
+            <div class="alert alert-success" role="alert" *ngIf="this.updateSettingsModel.message">
+                {{this.updateSettingsModel.message}}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteUser()">Șterge</button>
+            </div>
+        </div>
+    </div>
+</div> -->
