@@ -65,6 +65,10 @@ export class UsersListComponent implements OnInit {
     this.location.back();
   }
 
+  onNavigateToModifyPage(userID: any) {
+    window.location.href = window.location.origin+ '/admin-panel-dashboard/update-user/' + userID
+  }
+
   onSearch(waitTime = 200) {
 
     // if (this.searchTimeout)

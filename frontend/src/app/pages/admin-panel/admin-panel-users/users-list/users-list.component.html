@@ -70,13 +70,18 @@
             <div>
                 <div class="card" id="user" style="margin:5px">
                     <div class="row" style="margin-top:10px;margin-left:10px">
-                        <div class="col-10">
+                        <div class="col-9">
                             <h5><b>{{user.name}}</b></h5>
                         </div>
                         <div class="col-1">
                             <span (click)="getUserById(user._id)" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 style="font-size:16px;font-weight:700;cursor:pointer;color:#71868a">
                                 Vezi detalii
+                            </span>
+                        </div>
+                        <div class="col-1">
+                            <span style="font-size:16px;font-weight:700;cursor:pointer;color:#F17A32" (click)="onNavigateToModifyPage(user._id)">
+                                Modifică
                             </span>
                         </div>
                         <div class="col-1">

@@ -19,10 +19,13 @@ export class SignUpComponent implements OnInit {
     name: '',
     email: '',
     password: '',
-    language: 'ro'
+    language: 'ro',
+    role: 'regular'
   }
 
   errorMessage = ''
+  successMessage = ''
+
   constructor(private requestService: RequestService) { }
 
   ngOnInit(): void {
@@ -40,7 +43,14 @@ export class SignUpComponent implements OnInit {
 
   onSignUp = () => {
     if (!this.onValidateFields()) return
-    return this.requestService.requestPost(`${environment.apiUrl}/users/register`, this.selfSignUpModel, this.selfSignUpBody, {}, () => {})
+    return this.requestService.requestPost(`${environment.apiUrl}/users/register`, this.selfSignUpModel, this.selfSignUpBody, {}, () => {
+      if (this.selfSignUpModel.message === 'Procesul a fost executat cu succes' || this.selfSignUpModel.message === 'Process completed successfully.') {
+        this.successMessage = 'Vei primi în scurt timp un email pentru confirmare!'
+        setTimeout(() => {
+          window.location.href = window.location.origin + '/login'
+        }, 3500)
+      }
+    })
   }
 
 }

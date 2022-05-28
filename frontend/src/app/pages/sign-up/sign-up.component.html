@@ -50,9 +50,19 @@
                         </div>
                     </form>
                 </div>
+                <div *ngIf="this.selfSignUpModel.error" class="alert alert-danger">
+                    {{this.selfSignUpModel.error}}
+                </div>
+
                 <div *ngIf="errorMessage" class="alert alert-danger">
                     {{errorMessage}}
                 </div>
+
+                <div class="alert alert-success" role="alert" *ngIf="this.successMessage">
+                    {{this.successMessage}}
+                    <br>
+                </div>
+
                 <div class="d-flex justify-content-center mt-3 login_container">
                     <button type="button" name="button" class="btn login_btn" (click)="onSignUp()">Creează cont</button>
                 </div>

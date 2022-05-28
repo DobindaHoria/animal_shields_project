@@ -46,6 +46,9 @@
 				<div *ngIf="errorMessage" class="alert alert-danger">
 					{{errorMessage}}
 				</div>
+				<div *ngIf="this.loginModel.error" class="alert alert-danger">
+					{{this.loginModel.error}}
+				</div>
 				<div class="d-flex justify-content-center mt-3 login_container">
 					<button type="button" name="button" class="btn login_btn" (click)="onLogin()">Logare</button>
 				</div>

@@ -36,6 +36,14 @@
                     </option>
                 </select>
             </div>
+            <div class="mb-3" class="input-container">
+                <label for="roleInput" class="form-label">*Rol:</label>
+                <select name="roleInput" class="form-select" aria-label="Default select example" [(ngModel)]="userCreateBody.role">
+                    <option value="{{role}}"
+                        *ngFor="let role of this.settingsModel?.value?.User_Roles">{{role}}
+                    </option>
+                </select>
+            </div>
             <br>
             <div class="alert alert-success" role="alert" *ngIf="this.createUserModel.message">
                 {{this.createUserModel.message}}

@@ -30,6 +30,7 @@ export class CreateUserComponent implements OnInit {
     email: '',
     password: '',
     language: '',
+    role: '',
   }
 
   arrayOfErrors: any = []
@@ -51,7 +52,7 @@ export class CreateUserComponent implements OnInit {
 
   onValidateFields(body: any) {
     this.arrayOfErrors = []
-    if (!body.name || !body.email || !body.password || !body.language) {
+    if (!body.name || !body.email || !body.password || !body.language || !body.role) {
       this.arrayOfErrors.push('Vă rugăm să completați toate cămpurile!')
     }
     if (body.email) {
@@ -66,7 +67,7 @@ export class CreateUserComponent implements OnInit {
     if (body.password && body.password.length < 5) {
       this.arrayOfErrors.push('Vă rugăm să introduceți un nume format din minim 5 caractere!')
     }
-
+  
     if (this.arrayOfErrors.length) return false
     return true
   }

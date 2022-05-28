@@ -1,1 +1,47 @@
-<p>update-user works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2 style="margin-left: auto;margin-right: auto;margin-top:20px;">
+                Modifică utilizatorul
+            </h2>
+        </div>
+        <div class="col">
+            <button type="button back-btn"
+                style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer"
+                class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
+                Înapoi
+            </button>
+        </div>
+    </div>
+    <hr style="background-color: black ">
+    <div class="card">
+        <form>
+            <div class="mb-3" class="input-container">
+                <label for="nameInput" class="form-label">*Nume:</label>
+                <input type="email" class="form-control" name="nameInput" [(ngModel)]="userUpdateBody.name">
+            </div>
+            <div class="mb-3" class="input-container">
+                <label for="roleInput" class="form-label">*Rol:</label>
+                <select name="roleInput" class="form-select" aria-label="Default select example" [(ngModel)]="userUpdateBody.role">
+                    <option value="{{role}}"
+                        *ngFor="let role of this.settingsModel?.value?.User_Roles">{{role}}
+                    </option>
+                </select>
+            </div>
+            <br>
+            <div class="alert alert-success" role="alert" *ngIf="this.updateUserModel.message">
+                {{this.updateUserModel.message}}
+                <br>
+            </div>
+            <div *ngIf="arrayOfErrors.length>0">
+                <div *ngFor="let error of arrayOfErrors;let i = index">
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary create-btn" (click)="onUpdateUser()">Modifică</button>
+        </form>
+    </div>
+</div>
