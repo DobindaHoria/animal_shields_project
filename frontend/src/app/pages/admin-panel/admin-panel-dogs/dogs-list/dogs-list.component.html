@@ -3,14 +3,14 @@
     <div class="row">
         <div class="col">
             <h2 style="margin-left: auto;margin-right: auto;margin-top:20px;">
-                Listă utilizatori
+                Listă câini
             </h2>
         </div>
         <div class="col">
             <button type="button"
                 style="float:right;margin-top:20px;color:white;background: #F17A32;border:none;cursor:pointer"
-                class="btn btn-raised btn-primary" routerLink="/admin-panel-dashboard/create-user"> +
-                Creează utilizator
+                class="btn btn-raised btn-primary" routerLink="/admin-panel-dashboard/create-dog"> +
+                Creează câine
             </button>
             <button type="button back-btn"
                 style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer"
@@ -21,51 +21,33 @@
     </div>
     <hr style="background-color: black ">
 
-    <div class="card"
-        style="margin-top:15px ;box-shadow: 2px 3px 6px  rgba(0,0,0,0.16);margin-left:auto;margin-right:auto;cursor: context-menu;">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h5>Nume:</h5>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name='lastName' placeholder="ex: Doe"
-                            [(ngModel)]="search.lastName" (ngModelChange)="onSearch()"
-                            [ngModelOptions]="{standalone: true}">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <h5>Prenume:</h5>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="ex: John" name='firstName'
-                            [(ngModel)]="search.firstName" (ngModelChange)="onSearch()"
-                            [ngModelOptions]="{standalone: true}">
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-4" *ngFor="let dog of dogsModel?.value?.dogs">
+            <div class="card dog-card">
+                <h5>{{dog?.name}}</h5>
+                <br />
+                <div class="picture-container">
+                    <img class="no-picture" *ngIf="!dog?.images?.length" src="../../../assets/No_image_available.png" />
 
-            </div>
-            <div class="row" *ngIf="settingsModel.value?.User_Roles">
-                <div class="col-sm-6">
-                    <h5>Rol:</h5>
-                    <select class="form-control" id="role" name="roleSelect" [(ngModel)]="search.role"
-                        (change)="onSearch()" [ngModelOptions]="{standalone: true}">
-                        <option value="" selected>
-                            selectează un rol
-                        </option>
-                        <option *ngFor="let role of settingsModel?.value?.User_Roles" value="{{role}}">
-                            {{role}}
-                        </option>
-                    </select>
+                </div>
+                <div *ngIf="dog?.gender">
+                    {{dog?.gender}}
+                </div>
+                <div style="margin-top: 50px">
+                    <button type="button back-btn"
+                        style="margin-right: 20px; color:white;background: #F17A32;border:none;cursor:pointer"
+                        class="btn btn-raised btn-primary">
+                        Modifică
+                    </button>
+                    <button class="btn btn-raised btn-danger" (click)="this.selectedDogID=dog?._id" data-bs-toggle="modal"
+                    data-bs-target="#deleteDogModal">
+                        Șterge
+                    </button>
                 </div>
             </div>
-            <br>
-            <button class="btn btn-raised btn-danger" (click)="onResetSearch()">
-                Resetează filtrele
-            </button>
         </div>
-
     </div>
-
-    <div *ngFor="let user of usersModel?.value?.users">
+    <!-- <div *ngFor="let user of usersModel?.value?.users">
         <div *ngIf="user.name">
             <div>
                 <div class="card" id="user" style="margin:5px">
@@ -87,7 +69,7 @@
                         </div>
                         <div class="col-1">
                             <span *ngIf="role==='admin'" (click)="this.selectedUserID=user?._id" data-bs-toggle="modal"
-                                data-bs-target="#deleteUserModal"
+                                data-bs-target="#deleteDogModal"
                                 style="font-size:16px;font-weight:700;cursor:pointer;color:#e2341d">
                                 Șterge
                             </span>
@@ -96,7 +78,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- VIEW DETAILS USER MODAL -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="detailUserModal" aria-hidden="true">
@@ -133,7 +115,7 @@
     </div>
 
     <!-- DELETE USER MODAL -->
-    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModal" aria-hidden="true">
+    <div class="modal fade" id="deleteDogModal" tabindex="-1" aria-labelledby="deleteDogModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,16 +123,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Ești sigur că dorești să ștergi acest utilizator?</p>
+                    <p>Ești sigur că dorești să ștergi acest câine?</p>
                 </div>
 
-                <div class="alert alert-success" role="alert" *ngIf="this.deleteUserModel.message">
-                    {{this.deleteUserModel.message}}
+                <div class="alert alert-success" role="alert" *ngIf="this.deleteDogModel.message">
+                    {{this.deleteDogModel.message}}
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
-                    <button type="button" class="btn btn-danger" (click)="onDeleteUser()">Șterge</button>
+                    <button type="button" class="btn btn-danger" (click)="onDeleteDog()">Șterge</button>
                 </div>
             </div>
         </div>

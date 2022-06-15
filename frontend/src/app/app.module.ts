@@ -16,13 +16,15 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule ,HttpClient} from "@angular/common/http";
 import { AdminPanelMenuComponent } from './pages/admin-panel/admin-panel-menu/admin-panel-menu.component';
-import { AdminPanelDogsComponent } from './pages/admin-panel/admin-panel-dogs/admin-panel-dogs.component';
 import { AdminPanelGeneralSettingsComponent } from './pages/admin-panel/admin-panel-general-settings/admin-panel-general-settings.component';
 import { AdminPanelArticlesComponent } from './pages/admin-panel/admin-panel-articles/admin-panel-articles.component';
 import { AuthService } from './services/auth.service';
 import { CreateUserComponent } from './pages/admin-panel/admin-panel-users/create-user/create-user.component';
 import { UpdateUserComponent } from './pages/admin-panel/admin-panel-users/update-user/update-user.component';
 import { UsersListComponent } from './pages/admin-panel/admin-panel-users/users-list/users-list.component';
+import { DogsListComponent } from './pages/admin-panel/admin-panel-dogs/dogs-list/dogs-list.component';
+import { DogsDetailsComponent } from './pages/admin-panel/admin-panel-dogs/dogs-details/dogs-details.component';
+import { CreateDogComponent } from './pages/admin-panel/admin-panel-dogs/create-dog/create-dog.component';
 
 @NgModule({
   declarations: [
@@ -37,12 +39,14 @@ import { UsersListComponent } from './pages/admin-panel/admin-panel-users/users-
     SignUpComponent,
     ForgotPasswordComponent,
     AdminPanelMenuComponent,
-    AdminPanelDogsComponent,
     AdminPanelGeneralSettingsComponent,
     AdminPanelArticlesComponent,
     CreateUserComponent,
     UpdateUserComponent,
     UsersListComponent,
+    DogsListComponent,
+    DogsDetailsComponent,
+    CreateDogComponent,
   ],
   imports: [
     BrowserModule,

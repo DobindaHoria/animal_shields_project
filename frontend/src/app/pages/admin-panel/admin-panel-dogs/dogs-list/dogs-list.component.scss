@@ -1,0 +1,18 @@
+.dog-card {
+    min-height: 300px;
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    .picture-container {
+        width: 100%;
+        text-align: center;
+        .no-picture {
+            max-width: 120px;
+            height: auto;
+        }
+    }
+}
+.dog-card:hover {
+    cursor: pointer;
+    border: 1px solid black;
+}

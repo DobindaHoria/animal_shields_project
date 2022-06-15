@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminPanelDogsComponent } from './admin-panel-dogs.component';
+import { DogsListComponent } from './dogs-list.component';
 
-describe('AdminPanelDogsComponent', () => {
-  let component: AdminPanelDogsComponent;
-  let fixture: ComponentFixture<AdminPanelDogsComponent>;
+describe('DogsListComponent', () => {
+  let component: DogsListComponent;
+  let fixture: ComponentFixture<DogsListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminPanelDogsComponent ]
+      declarations: [ DogsListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminPanelDogsComponent);
+    fixture = TestBed.createComponent(DogsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

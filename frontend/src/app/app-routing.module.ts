@@ -13,7 +13,12 @@ import {CreateUserComponent} from './pages/admin-panel/admin-panel-users/create-
 import {UpdateUserComponent} from './pages/admin-panel/admin-panel-users/update-user/update-user.component'
 // end region User Management
 
-import { AdminPanelDogsComponent } from './pages/admin-panel/admin-panel-dogs/admin-panel-dogs.component';
+// Dogs Management
+import { DogsListComponent } from './pages/admin-panel/admin-panel-dogs/dogs-list/dogs-list.component';
+import { CreateDogComponent } from './pages/admin-panel/admin-panel-dogs/create-dog/create-dog.component';
+// import { UpdateDogComponent } from './pages/admin-panel/admin-panel-dogs/dogs-details/dogs-details.component';
+// end region Dogs Management
+
 import { AdminPanelGeneralSettingsComponent } from './pages/admin-panel/admin-panel-general-settings/admin-panel-general-settings.component';
 import { AdminPanelArticlesComponent } from './pages/admin-panel/admin-panel-articles/admin-panel-articles.component';
 
@@ -29,7 +34,7 @@ const routes: Routes = [
 	{path: 'admin-panel-dashboard/users-list', component: UsersListComponent},
 	{path: 'admin-panel-dashboard/create-user', component: CreateUserComponent},
 	{path: 'admin-panel-dashboard/update-user/:id', component: UpdateUserComponent},
-	{path: 'admin-panel-dashboard/dogs', component: AdminPanelDogsComponent},
+	{path: 'admin-panel-dashboard/dogs', component: DogsListComponent},
 	{path: 'admin-panel-dashboard/general-settings', component: AdminPanelGeneralSettingsComponent},
 	{path: 'admin-panel-dashboard/articles', component: AdminPanelArticlesComponent},
 	{path: '**', component: DashboardComponent}
