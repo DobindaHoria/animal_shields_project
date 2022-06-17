@@ -35,6 +35,7 @@ const routes: Routes = [
 	{path: 'admin-panel-dashboard/create-user', component: CreateUserComponent},
 	{path: 'admin-panel-dashboard/update-user/:id', component: UpdateUserComponent},
 	{path: 'admin-panel-dashboard/dogs', component: DogsListComponent},
+	{path: 'admin-panel-dashboard/create-dog', component: CreateDogComponent},
 	{path: 'admin-panel-dashboard/general-settings', component: AdminPanelGeneralSettingsComponent},
 	{path: 'admin-panel-dashboard/articles', component: AdminPanelArticlesComponent},
 	{path: '**', component: DashboardComponent}

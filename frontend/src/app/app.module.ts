@@ -15,6 +15,9 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule ,HttpClient} from "@angular/common/http";
+// import { QuillModule } from 'ngx-quill';
+
+//pages
 import { AdminPanelMenuComponent } from './pages/admin-panel/admin-panel-menu/admin-panel-menu.component';
 import { AdminPanelGeneralSettingsComponent } from './pages/admin-panel/admin-panel-general-settings/admin-panel-general-settings.component';
 import { AdminPanelArticlesComponent } from './pages/admin-panel/admin-panel-articles/admin-panel-articles.component';
@@ -54,6 +57,7 @@ import { CreateDogComponent } from './pages/admin-panel/admin-panel-dogs/create-
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
+	// QuillModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
