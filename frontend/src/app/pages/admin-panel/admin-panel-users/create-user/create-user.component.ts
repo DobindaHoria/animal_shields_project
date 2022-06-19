@@ -9,7 +9,6 @@ import { environment } from '../../../../../../src/environments/environment';
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
-
   token: any = ''
   language: any = ''
 

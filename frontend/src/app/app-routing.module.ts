@@ -16,28 +16,40 @@ import {UpdateUserComponent} from './pages/admin-panel/admin-panel-users/update-
 // Dogs Management
 import { DogsListComponent } from './pages/admin-panel/admin-panel-dogs/dogs-list/dogs-list.component';
 import { CreateDogComponent } from './pages/admin-panel/admin-panel-dogs/create-dog/create-dog.component';
-// import { UpdateDogComponent } from './pages/admin-panel/admin-panel-dogs/dogs-details/dogs-details.component';
+import { DogsDetailsComponent } from './pages/admin-panel/admin-panel-dogs/dogs-details/dogs-details.component';
 // end region Dogs Management
 
+// Blog Management
+import { ArticleListComponent } from './pages/admin-panel/admin-panel-blog/article-list/article-list.component';
+import { CreateArticleComponent } from './pages/admin-panel/admin-panel-blog/create-article/create-article.component';
+import { UpdateArticleComponent } from './pages/admin-panel/admin-panel-blog/update-article/update-article.component';
+import { ArticleDetailsComponent } from './pages/article-details/article-details.component';
+// end region Blog Management
+import { AdoptComponent } from './pages/adopt/adopt.component';
+
 import { AdminPanelGeneralSettingsComponent } from './pages/admin-panel/admin-panel-general-settings/admin-panel-general-settings.component';
-import { AdminPanelArticlesComponent } from './pages/admin-panel/admin-panel-articles/admin-panel-articles.component';
 
 const routes: Routes = [
 	{path: '', component: DashboardComponent},
 	{path: 'dashboard', component: DashboardComponent},
 	{path: 'blog', component: BlogComponent},
+	{path: 'blog/:id', component: ArticleDetailsComponent},
 	{path: 'donation', component: DonationComponent},
 	{path: 'login', component: LoginComponent},
 	{path: 'sign-up', component: SignUpComponent},
 	{path: 'forgot-password', component: ForgotPasswordComponent},
+	{path: 'adopt', component: AdoptComponent},
 	{path: 'admin-panel-dashboard', component: AdminPanelMenuComponent},
 	{path: 'admin-panel-dashboard/users-list', component: UsersListComponent},
 	{path: 'admin-panel-dashboard/create-user', component: CreateUserComponent},
 	{path: 'admin-panel-dashboard/update-user/:id', component: UpdateUserComponent},
 	{path: 'admin-panel-dashboard/dogs', component: DogsListComponent},
 	{path: 'admin-panel-dashboard/create-dog', component: CreateDogComponent},
+	{path: 'admin-panel-dashboard/update-dog/:id', component: DogsDetailsComponent},
 	{path: 'admin-panel-dashboard/general-settings', component: AdminPanelGeneralSettingsComponent},
-	{path: 'admin-panel-dashboard/articles', component: AdminPanelArticlesComponent},
+	{path: 'admin-panel-dashboard/articles', component: ArticleListComponent},
+	{path: 'admin-panel-dashboard/create-article', component: CreateArticleComponent},
+	{path: 'admin-panel-dashboard/update-article/:id', component: UpdateArticleComponent},
 	{path: '**', component: DashboardComponent}
 ];
 

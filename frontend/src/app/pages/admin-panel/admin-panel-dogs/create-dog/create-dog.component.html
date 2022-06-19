@@ -6,7 +6,9 @@
 			</h2>
 		</div>
 		<div class="col">
-			<button type="button back-btn" style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer" class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
+			<button type="button back-btn"
+				style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer"
+				class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
 				Înapoi
 			</button>
 		</div>
@@ -20,11 +22,22 @@
 			</div>
 			<div class="mb-3" class="input-container">
 				<label for="birthDateInput" class="form-label">*Dată de naștere:</label>
-				<input type="text" class="form-control" name="birthDateInput" [(ngModel)]="dogCreateBody.birth_date">
+				<!-- <input type="text" class="form-control" name="birthDateInput" [(ngModel)]="dogCreateBody.birth_date"> -->
+				<form class="form-inline">
+					<div class="form-group">
+						<div class="input-group">
+							<input class="form-control" readonly style="max-width:130px" placeholder="an-luna-zi"
+								name="dpj" [(ngModel)]="dogCreateBody.birth_date" ngbDatepicker #j="ngbDatepicker">
+							<button (click)="j.toggle()">Alege dată</button>
+						</div>
+					</div>
+				</form>
+
 			</div>
 			<div class="mb-3" class="input-container">
 				<label for="sexInput" class="form-label">*Sex:</label>
-				<select name="sexInput" class="form-select" aria-label="Default select example" [(ngModel)]="dogCreateBody.gender">
+				<select name="sexInput" class="form-select" aria-label="Default select example"
+					[(ngModel)]="dogCreateBody.gender">
 					<option value="M">
 						Masculin
 					</option>
@@ -36,12 +49,17 @@
 			<div class="form-group">
 				<label>Imagine :</label>
 				<label class="btn custom-input-btn">
-					<img src="{{getImg()}}"  style="width:60px;height:60px" *ngIf="thumbnail && this.thumbnail.imageSrc!=null">
+					<img src="{{getImg()}}" style="width:60px;height:60px"
+						*ngIf="thumbnail && this.thumbnail.imageSrc!=null">
 					<br>
-					<div class="files with-image " style="flex:1;margin-top: -17px; border: 1px solid rgba(0, 0, 0, 0.493); padding: 10px; margin-left: -10px" [hidden]="thumbnail.imageSrc!==undefined">
-						<input style="display:none" type="file" multiple="false" (change)="SetFile($event)" name="thumbnail1" [(ngModel)]="thumbnail.inputModel" accept="image/x-png,image/gif,image/jpeg">
+					<div class="files with-image "
+						style="flex:1;margin-top: -17px; border: 1px solid rgba(0, 0, 0, 0.493); padding: 10px; margin-left: -10px"
+						[hidden]="thumbnail.imageSrc!==undefined">
+						<input style="display:none" type="file" multiple="false" (change)="SetFile($event)"
+							name="thumbnail1" [(ngModel)]="thumbnail.inputModel"
+							accept="image/x-png,image/gif,image/jpeg">
 						<i class="fa fa-cloud-upload"></i> <span style="margin-top:-10px">
-							<fa-icon [icon]="faCloud" [styles]="{'stroke': '#F17A32', 'color': 'black'}" ></fa-icon>
+							<fa-icon [icon]="faCloud" [styles]="{'stroke': '#F17A32', 'color': 'black'}"></fa-icon>
 							Încarcă poză
 						</span>
 					</div>

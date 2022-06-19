@@ -1,1 +1,87 @@
-<p>dogs-details works!</p>
+<div class="container">
+	<div class="row">
+		<div class="col">
+			<h2 style="margin-left: auto;margin-right: auto;margin-top:20px;">
+				Modifică câine
+			</h2>
+		</div>
+		<div class="col">
+			<button type="button back-btn"
+				style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer"
+				class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
+				Înapoi
+			</button>
+		</div>
+	</div>
+	<hr style="background-color: black ">
+	<div class="card">
+		<form>
+			<div class="mb-3" class="input-container">
+				<label for="nameInput" class="form-label">*Nume:</label>
+				<input type="text" class="form-control" name="nameInput" [(ngModel)]="dogUpdateBody.name">
+			</div>
+			<div class="mb-3" class="input-container">
+				<label for="birthDateInput" class="form-label">*Dată de naștere:</label>
+				<!-- <input type="text" class="form-control" name="birthDateInput" [(ngModel)]="dogUpdateBody.birth_date"> -->
+				<form class="form-inline">
+					<div class="form-group">
+						<div class="input-group">
+							<input class="form-control" readonly style="max-width:130px" placeholder="an-luna-zi"
+								name="dpj" [(ngModel)]="dogUpdateBody.birth_date" ngbDatepicker #j="ngbDatepicker">
+							<button (click)="j.toggle()">Alege dată</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+			<div class="mb-3" class="input-container">
+				<label for="sexInput" class="form-label">*Sex:</label>
+				<select name="sexInput" class="form-select" aria-label="Default select example"
+					[(ngModel)]="dogUpdateBody.gender">
+					<option value="M">
+						Masculin
+					</option>
+					<option value="F">
+						Feminin
+					</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>Imagine :</label>
+				<label class="btn custom-input-btn">
+					<img src="{{getImg()}}" style="width:60px;height:60px"
+						*ngIf="thumbnail && this.thumbnail.imageSrc!=null">
+					<br>
+					<div class="files with-image "
+						style="flex:1;margin-top: -17px; border: 1px solid rgba(0, 0, 0, 0.493); padding: 10px; margin-left: -10px"
+						[hidden]="thumbnail.imageSrc!==undefined">
+						<input style="display:none" type="file" multiple="false" (change)="SetFile($event)"
+							name="thumbnail1" [(ngModel)]="thumbnail.inputModel"
+							accept="image/x-png,image/gif,image/jpeg">
+						<i class="fa fa-cloud-upload"></i> <span style="margin-top:-10px">
+							<fa-icon [icon]="faCloud" [styles]="{'stroke': '#F17A32', 'color': 'black'}"></fa-icon>
+							Încarcă poză
+						</span>
+					</div>
+				</label>
+				<h5 *ngIf="thumbnail && this.thumbnail.imageSrc!=null">{{thumbnail.imageFile.name}}
+				</h5>
+				<button class="btn btn-danger" (click)="SetFile(null);" *ngIf="thumbnail.imageSrc">Șterge</button>
+			</div>
+			<br>
+			<div class="alert alert-success" role="alert" *ngIf="this.updateDogModel.message">
+				{{this.updateDogModel.message}}
+				<br>
+			</div>
+			<div *ngIf="arrayOfErrors.length>0">
+				<div *ngFor="let error of arrayOfErrors;let i = index">
+					<div class="alert alert-danger" role="alert">
+						{{error}}
+						<br>
+					</div>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary create-btn" (click)="onCreateDog()">Modifică</button>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,120 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2 style="margin-left: auto;margin-right: auto;margin-top:20px;">
+                Creează articol
+            </h2>
+        </div>
+        <div class="col">
+            <button type="button back-btn"
+                style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer"
+                class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
+                Înapoi
+            </button>
+        </div>
+    </div>
+    <hr style="background-color: black ">
+    <div class="card">
+        <form>
+            <div class="card">
+                <h5>Română</h5>
+                <div class="mb-3" class="input-container">
+                    <label for="nameInput" class="form-label">*Titlu:</label>
+                    <input type="text" class="form-control" name="nameInput"
+                        [(ngModel)]="articleCreateBody.text[0].title">
+                </div>
+                <div class="mb-3" class="input-container">
+                    <label for="emailInput" class="form-label">*Descriere:</label>
+                    <textarea rows="7"  type="text" class="form-control" name="emailInput"
+                        [(ngModel)]="articleCreateBody.text[0].content"></textarea>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="emailInput" class="form-label">*Etichete:</label>
+                    <form>
+                        <div *ngFor="let data of this.settingsModel.value.Article_tags[0]?.tags">
+                            <input type="checkbox" (change)="onChangeTagsArray(0, data)"> {{data}}<br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br />
+            <div class="card">
+                <h5>English</h5>
+                <div class="mb-3" class="input-container">
+                    <label for="nameInput" class="form-label">*Titlu:</label>
+                    <input type="text" class="form-control" name="nameInput"
+                        [(ngModel)]="articleCreateBody.text[1].title">
+                </div>
+                <div class="mb-3" class="input-container">
+                    <label for="emailInput" class="form-label">*Descriere:</label>
+                    <textarea rows="7"  type="text" class="form-control" name="emailInput"
+                        [(ngModel)]="articleCreateBody.text[1].content"></textarea>
+                </div>
+                <br />
+                <div class="form-group">
+                    <label for="emailInput" class="form-label">*Etichete:</label>
+                    <form>
+                        <div *ngFor="let data of this.settingsModel.value.Article_tags[1]?.tags">
+                            <input type="checkbox" (change)="onChangeTagsArray(1, data)"> {{data}}<br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br />
+            <div class="mb-3" class="input-container">
+                <label for="publishedInput" class="form-label">*Published:</label>
+                <select name="publishedInput" class="form-select" aria-label="Default select example"
+                    [(ngModel)]="articleCreateBody.published">
+                    <option value="{{true}}">Da</option>
+                    <option value="{{false}}">Nu</option>
+                </select>
+            </div>
+            <div class="mb-3" class="input-container">
+                <label for="stickyInput" class="form-label">*Sticky:</label>
+                <select name="stickyInput" class="form-select" aria-label="Default select example"
+                    [(ngModel)]="articleCreateBody.sticky">
+                    <option value="{{true}}">Da</option>
+                    <option value="{{false}}">Nu</option>
+                </select>
+            </div>
+            <br>
+            <div class="form-group">
+				<label>Imagine :</label>
+				<label class="btn custom-input-btn">
+					<img src="{{getImg()}}" style="width:60px;height:60px"
+						*ngIf="thumbnail && this.thumbnail.imageSrc!=null">
+					<br>
+					<div class="files with-image "
+						style="flex:1;margin-top: -17px; border: 1px solid rgba(0, 0, 0, 0.493); padding: 10px; margin-left: -10px"
+						[hidden]="thumbnail.imageSrc!==undefined">
+						<input style="display:none" type="file" multiple="false" (change)="SetFile($event)"
+							name="thumbnail1" [(ngModel)]="thumbnail.inputModel"
+							accept="image/x-png,image/gif,image/jpeg">
+						<i class="fa fa-cloud-upload"></i> <span style="margin-top:-10px">
+							<fa-icon [icon]="faCloud" [styles]="{'stroke': '#F17A32', 'color': 'black'}"></fa-icon>
+							Încarcă poză
+						</span>
+					</div>
+				</label>
+				<h5 *ngIf="thumbnail && this.thumbnail.imageSrc!=null">{{thumbnail.imageFile.name}}
+				</h5>
+				<button class="btn btn-danger" (click)="SetFile(null);" *ngIf="thumbnail.imageSrc">Șterge</button>
+			</div>
+            <br />
+            <div class="alert alert-success" role="alert" *ngIf="this.createArticleModel.message">
+                {{this.createArticleModel.message}}
+                <br>
+            </div>
+            <div *ngIf="arrayOfErrors.length>0">
+                <div *ngFor="let error of arrayOfErrors;let i = index">
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary create-btn" (click)="onCreateArticle()">Creează</button>
+        </form>
+    </div>
+</div>

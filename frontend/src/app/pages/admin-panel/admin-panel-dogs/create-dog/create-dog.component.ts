@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { RequestService, BodyTypes } from '../../../../services/request.service'
 import { environment } from '../../../../../../src/environments/environment';
 import { faCloud } from '@fortawesome/free-solid-svg-icons';
+import { NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
 	selector: 'app-create-dog',
@@ -37,8 +38,10 @@ export class CreateDogComponent implements OnInit {
 
 	thumbnail: any = { imageFile: undefined, imageSrc: undefined, inputModel: undefined };
 
-	constructor(private location: Location,
-		private requestService: RequestService) { }
+	constructor(private location: Location, private requestService: RequestService, config: NgbDatepickerConfig) {
+		config.minDate = { year: 1900, month: 1, day: 1 };
+		config.maxDate = { year: 2099, month: 12, day: 31 };
+	}
 
 	ngOnInit(): void {
 		if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
@@ -71,7 +74,7 @@ export class CreateDogComponent implements OnInit {
 		if (!body.name || !body.name.length) {
 			this.arrayOfErrors.push('Vă rugăm să introduceți un nume!')
 		}
-		if (!body.birth_date || !body.birth_date.length) {
+		if (!body.birth_date || !body.birth_date.year) {
 			this.arrayOfErrors.push('Vă rugăm să introduceți o dată de naștere!')
 		}
 		if (!body.gender || !body.gender) {
@@ -82,22 +85,43 @@ export class CreateDogComponent implements OnInit {
 		return true
 	}
 
+	makeItLegit(nr: number) {
+		if(nr<=9) return `0${nr}`
+		else return nr
+	}
+
 	onCreateDog() {
 		let thumbnail = [this.thumbnail];
+	
 		if (!this.onValidateFields(this.dogCreateBody)) return
-
-		return this.requestService.requestPost(`${environment.apiUrl}/dogs`, this.createDogModel, this.dogCreateBody, { "Authorization": `Bearer ${this.token}` }, () => {
-			if (this.createDogModel.message === 'Procesul a fost executat cu succes' || this.createDogModel.message === 'Process completed successfully.') {
-				setTimeout(() => {
-					this.onNavigateBack()
-				}, 1500)
-			}
-		},
-			{
-				bodyType: BodyTypes.FORMDATA, images: [{
-					name: "images",
-					file: thumbnail
-				}]
+		
+		let createBody = {
+			...this.dogCreateBody,
+			birth_date: this.dogCreateBody.birth_date.year + '-' + this.makeItLegit(this.dogCreateBody.birth_date.month) + '-' + this.makeItLegit(this.dogCreateBody.birth_date.day)
+		}
+		
+		if (thumbnail[0].imageSrc) {
+			return this.requestService.requestPost(`${environment.apiUrl}/dogs`, this.createDogModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
+				if (this.createDogModel.message === 'Procesul a fost executat cu succes' || this.createDogModel.message === 'Process completed successfully.') {
+					setTimeout(() => {
+						this.onNavigateBack()
+					}, 1500)
+				}
+			},
+				{
+					bodyType: BodyTypes.FORMDATA, images: [{
+						name: "images",
+						file: thumbnail
+					}]
+				})
+		} else {
+			return this.requestService.requestPost(`${environment.apiUrl}/dogs`, this.createDogModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
+				if (this.createDogModel.message === 'Procesul a fost executat cu succes' || this.createDogModel.message === 'Process completed successfully.') {
+					setTimeout(() => {
+						this.onNavigateBack()
+					}, 1500)
+				}
 			})
+		}
 	}
 }

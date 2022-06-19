@@ -41,7 +41,7 @@ export class DogsListComponent implements OnInit {
 
   selectedDogID: any = ''
 
-  constructor( private location: Location, private requestService: RequestService) { }
+  constructor( private location: Location, private requestService: RequestService ) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
@@ -55,8 +55,8 @@ export class DogsListComponent implements OnInit {
     this.location.back();
   }
 
-  onNavigateToModifyPage(userID: any) {
-    window.location.href = window.location.origin+ '/admin-panel-dashboard/update-user/' + userID
+  onNavigateToModifyPage(dogID: any) {
+    window.location.href = window.location.origin+ '/admin-panel-dashboard/update-dog/' + dogID
   }
 
   getAllSettings() {

@@ -1,0 +1,128 @@
+<div style="height:100vh;background-color:#f5f5f5" class="screen">
+    <div class="container">
+        <br>
+        <!-- Default checked -->
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="title-page">Articole</span>
+            </div>
+            <div class="col-sm-6">
+                <button type="button"
+                    style="float:right;margin-top:20px;color:white;background: #F17A32;border:none;cursor:pointer"
+                    class="btn btn-raised btn-primary" routerLink="/admin-panel-dashboard/create-article"> +
+                    Creează articol
+                </button>
+                <button type="button back-btn"
+                    style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer"
+                    class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
+                    Înapoi
+                </button>
+
+
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="margin-top:-10px">
+            <div class="col-lg-3">
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <input type="text" class="form-control" placeholder="Caută după titlu" [(ngModel)]="filterArticle"
+                                (ngModelChange)="onFilterArticles()">
+                        </h5>
+
+                        <div class="form-group">
+                            <div class="switch-toggle switch-3 switch-candy" style="height: 30px;"
+                                (change)='getAllArticles()'>
+                                <input id="ro" name="state-d" type="radio" value="ro" [(ngModel)]="selectedLanguage" />
+                                <label for="ro" onclick="">RO</label>
+                                <input id="gb" rome="state-d" type="radio" value="gb" [(ngModel)]="selectedLanguage" />
+                                <label for="gb" onclick="">EN</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div *ngFor="let article of filteredArticles">
+                    <br>
+                    <div class="card article">
+
+                        <div class="row">
+                            <div class="col-sm-10">
+                            </div>
+
+                            <div class="col-sm-1" data-bs-toggle="modal" data-bs-target="#deleteArticleModal"
+                                (click)="this.selectedArticleID=article?._id">
+                                <button type="button back-btn" style="float:right;margin-top:10px; border:none"
+                                    class="btn btn-raised btn-danger"><i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-1">
+                                <button (click)="NavigateToArticleUpdate(article._id)" type="button back-btn"
+                                    style="float:right;margin-top:10px;margin-right:10px;background-color: #F17A32;border: none"
+                                    class="btn btn-raised btn-primary"><i class="fas fa-pencil-alt"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <br>
+
+                        <h5 style="font-size: 1.25rem;text-align: center;margin-top:10px"> {{getTitle(article)}}
+                        </h5>
+                        <div class="container" style="text-align:center;">
+                            <hr />
+                        </div>
+                        <span class="p-3" [innerHTML]="getContent(article)"></span>
+
+                        <span class="p-3"><b>Creat:
+                            </b>{{article.date | date : 'dd MMM. yyyy, HH:mm'}}</span>
+                        <div class="row p-3">
+                            <div class="col-sm-6 ">
+                                <i class="fas fa-tag" style="color:black">
+                                    <span *ngFor="let tag of getTags(article);let i= index">
+                                        {{tag}}<span *ngIf="i!==getTags(article)?.length -1">, </span>
+                                    </span></i>
+                            </div>
+
+                            <!-- <div class="col-sm-6 ">
+                                    <a class="readAll" (click)="NavigateToArticle(article._id)"
+                                        style="color:#1B315D;float:right;font-weight: 600;">10000</a>
+                                </div> -->
+
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- DELETE ARTICLE MODAL -->
+<div class="modal fade" id="deleteArticleModal" tabindex="-1" aria-labelledby="deleteArticleModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteUserModal">Avertisment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Ești sigur că dorești să ștergi acest articol?</p>
+            </div>
+
+            <div class="alert alert-success" role="alert" *ngIf="this.deleteArticleModel.message">
+                {{this.deleteArticleModel.message}}
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteArticle()">Șterge</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -36,85 +36,19 @@
                 <div style="margin-top: 50px">
                     <button type="button back-btn"
                         style="margin-right: 20px; color:white;background: #F17A32;border:none;cursor:pointer"
-                        class="btn btn-raised btn-primary">
+                        class="btn btn-raised btn-primary" (click)="onNavigateToModifyPage(dog._id)">
                         Modifică
                     </button>
-                    <button class="btn btn-raised btn-danger" (click)="this.selectedDogID=dog?._id" data-bs-toggle="modal"
-                    data-bs-target="#deleteDogModal">
+                    <button class="btn btn-raised btn-danger" (click)="this.selectedDogID=dog?._id"
+                        data-bs-toggle="modal" data-bs-target="#deleteDogModal">
                         Șterge
                     </button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- <div *ngFor="let user of usersModel?.value?.users">
-        <div *ngIf="user.name">
-            <div>
-                <div class="card" id="user" style="margin:5px">
-                    <div class="row" style="margin-top:10px;margin-left:10px">
-                        <div class="col-9">
-                            <h5><b>{{user.name}}</b></h5>
-                        </div>
-                        <div class="col-1">
-                            <span (click)="getUserById(user._id)" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                style="font-size:16px;font-weight:700;cursor:pointer;color:#71868a">
-                                Vezi detalii
-                            </span>
-                        </div>
-                        <div class="col-1">
-                            <span style="font-size:16px;font-weight:700;cursor:pointer;color:#F17A32"
-                                (click)="onNavigateToModifyPage(user._id)">
-                                Modifică
-                            </span>
-                        </div>
-                        <div class="col-1">
-                            <span *ngIf="role==='admin'" (click)="this.selectedUserID=user?._id" data-bs-toggle="modal"
-                                data-bs-target="#deleteDogModal"
-                                style="font-size:16px;font-weight:700;cursor:pointer;color:#e2341d">
-                                Șterge
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
-    <!-- VIEW DETAILS USER MODAL -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="detailUserModal" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailUserModal">Detalii Utilizator</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card viewProfile" *ngIf="userByIDModel?.value?.user">
-                        <h5 style="font-size:20px;color:grey;margin-top:15px">
-                            Email:
-                            <span style="font-size:25px;color:black">
-                                {{userByIDModel.value.user.email}}
-                            </span>
-                        </h5>
-                        <h5 style="font-size:20px;color:grey;margin-top:15px">
-                            Nume:
-                            <span style="font-size:25px;color:black">
-                                {{userByIDModel.value.user.name}}
-                            </span>
-                        </h5>
-                        <h5 style="font-size:20px;color:grey;margin-top:15px">
-                            Rol:
-                            <span style="font-size:25px;color:black;text-transform: capitalize;margin-top:10px">
-                                {{userByIDModel.value.user.role}}
-                            </span>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DELETE USER MODAL -->
+    <!-- DELETE DOG MODAL -->
     <div class="modal fade" id="deleteDogModal" tabindex="-1" aria-labelledby="deleteDogModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

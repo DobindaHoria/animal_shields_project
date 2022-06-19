@@ -1,1 +1,69 @@
-<app-article-list></app-article-list>
+<div style="height:100vh;background-color:#f5f5f5" class="screen">
+    <div class="container">
+        <br>
+        <!-- Default checked -->
+
+        <div class="row">
+            <div class="col-sm-6">
+                <span class="title-page">Articole</span>
+            </div>
+        </div>
+        <hr>
+        <div class="row" style="margin-top:-10px">
+            <div class="col-lg-3">
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <input type="text" class="form-control" placeholder="Caută după titlu" [(ngModel)]="filterArticle"
+                                (ngModelChange)="onFilterArticles()">
+                        </h5>
+
+                        <div class="form-group">
+                            <div class="switch-toggle switch-3 switch-candy" style="height: 30px;"
+                                (change)='getAllArticles()'>
+                                <input id="ro" name="state-d" type="radio" value="ro" [(ngModel)]="selectedLanguage" />
+                                <label for="ro" onclick="">RO</label>
+                                <input id="gb" rome="state-d" type="radio" value="gb" [(ngModel)]="selectedLanguage" />
+                                <label for="gb" onclick="">EN</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div *ngFor="let article of filteredArticles">
+                    <br>
+                    <div class="card article">
+                        <h5 style="font-size: 1.25rem;text-align: center;margin-top:10px"> {{getTitle(article)}}
+                        </h5>
+                        <div class="container" style="text-align:center;">
+                            <hr />
+                        </div>
+                        <span class="p-3" [innerHTML]="getContent(article)"></span>
+
+                        <span class="p-3"><b>Creat:
+                            </b>{{article.date | date : 'dd MMM. yyyy, HH:mm'}}</span>
+                        <div class="row p-3">
+                            <div class="col-sm-6 ">
+                                <i class="fas fa-tag" style="color:black">
+                                    <span *ngFor="let tag of getTags(article);let i= index">
+                                        {{tag}}<span *ngIf="i!==getTags(article)?.length -1">, </span>
+                                    </span></i>
+                            </div>
+
+                            <div class="col-sm-6 ">
+                                    <a class="readAll" (click)="NavigateToArticle(article._id)"
+                                        style="color:#1B315D;float:right;font-weight: 600;">Citește tot articolul...</a>
+                                </div>
+
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
