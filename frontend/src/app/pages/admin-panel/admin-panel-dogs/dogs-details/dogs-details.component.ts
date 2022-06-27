@@ -109,8 +109,6 @@ export class DogsDetailsComponent implements OnInit {
   getDogByID() {
     return this.requestService.requestGet(`${environment.apiUrl}/dogs/${this.dogID}`, this.dogByIDModel, { "Authorization": `Bearer ${this.token}` }, () => {
       if (this.dogByIDModel.value.dog) {
-        console.log('tent');
-
         const formatedDate = moment(this.dogByIDModel.value.dog.birth_date).format('YYYY-MM-DD')
         this.dogUpdateBody = {
           name: this.dogByIDModel.value.dog.name,
