@@ -1,0 +1,95 @@
+<div class="donate-page">
+    <img class="main-banner" src="../../../assets/donate-banner.png" />
+    <br />
+    <div class="container specifications">
+        <br>
+        <h1><b>Ce înseamnă donația ta?</b></h1>
+        <br>
+        <div class="row">
+            <div class="col-3">
+                <div class="circle">
+                    <br>
+                    <h4><b>20RON</b></h4>
+                    <p>îngrijire veterinară pentru un câine pe 3 luni</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="circle">
+                    <br>
+                    <h4><b>30RON</b></h4>
+                    <p>prelată pentru 3 cuști pentru protecție termică</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="circle">
+                    <br>
+                    <h4><b>40RON</b></h4>
+                    <p>10 căpițe de fân pentru 3 boxe pe 1 sâptămână</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="circle">
+                    <br>
+                    <h4><b>50RON</b></h4>
+                    <p>hrană pentru un câine pe o lună</p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="container donate-container">
+        <div class="donate-btn"  data-bs-toggle="modal" data-bs-target="#paymentModal" (click)="onClearModalData()">
+            <h1 class="text"><b>Donează</b></h1>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
+
+<div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="paymentModal">Panou pentru donare</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Vă rugăm să selectați mai jos suma pe care doriți să o donați!</p>
+            </div>
+        
+            <div class="col-10" style="margin-left: 14px;">
+                <h5>Suma: </h5>
+                <select class="form-control" id="role" name="roleSelect" [(ngModel)]="paymentValue"
+                    (change)="onChangePaymentValue()" [ngModelOptions]="{standalone: true}">
+                    <option value={{0}} selected>
+                        Selectează suma
+                    </option>
+                    <option value={{20}}>20 RON</option>
+                    <option value={{30}}>30 RON</option>
+                    <option value={{40}}>40 RON</option>
+                    <option value={{50}}>50 RON</option>
+                </select>
+                <br>
+            </div>
+
+            <div class="container">
+                <ngx-paypal *ngIf="paymentValue" [config]="payPalConfig"> </ngx-paypal>
+            </div>
+
+            <div *ngIf="paymentErrorMessage">
+                <div class="alert alert-danger" role="alert">
+                    {{paymentErrorMessage}}
+                </div>
+            </div>
+
+            <div *ngIf="paymentSuccessMessage">
+                <div class="alert alert-success" role="alert">
+                    {{paymentSuccessMessage}}
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
+            </div>
+        </div>
+    </div>
+</div>

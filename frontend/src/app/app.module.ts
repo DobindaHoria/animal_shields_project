@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { BlogComponent } from './pages/blog/blog.component';
-import { DonationComponent } from './pages/donation/donation.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FooterComponent } from './components/footer/footer.component';
@@ -15,6 +14,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 //pages
 import { AdminPanelMenuComponent } from './pages/admin-panel/admin-panel-menu/admin-panel-menu.component';
@@ -32,13 +32,14 @@ import { CreateArticleComponent } from './pages/admin-panel/admin-panel-blog/cre
 import { UpdateArticleComponent } from './pages/admin-panel/admin-panel-blog/update-article/update-article.component';
 import { ArticleDetailsComponent } from './pages/article-details/article-details.component';
 import { AdoptComponent } from './pages/adopt/adopt.component';
+import { DonateComponent } from './pages/donate/donate.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     BlogComponent,
-    DonationComponent,
+    DonateComponent,
     NavbarComponent,
     FooterComponent,
     LoginComponent,
@@ -58,6 +59,7 @@ import { AdoptComponent } from './pages/adopt/adopt.component';
     UpdateArticleComponent,
     ArticleDetailsComponent,
     AdoptComponent,
+    DonateComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { AdoptComponent } from './pages/adopt/adopt.component';
     FontAwesomeModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    NgxPayPalModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

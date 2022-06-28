@@ -1,0 +1,35 @@
+.donate-page {
+    font-family: 'Montserrat', sans-serif;
+    .main-banner {
+        width: 100%;
+    }
+    .specifications {
+        text-align: center;
+        .circle {
+            min-height: 150px;
+            background: #F17A32;
+            color: white;
+        }
+    }
+    .donate-container {
+        display: flex;
+        justify-content: center;
+        .donate-btn {
+            padding: 10px;
+            background: #F17A32;
+            color: white;
+            text-align: center;
+            max-width: 250px;
+            margin-bottom: 30px;
+            border-radius: 16px;
+            cursor: pointer;
+            .text {
+                margin-top: 6px;
+            }
+        }
+        .donate-btn:hover {
+            background: black;
+        }
+    }
+    
+}
