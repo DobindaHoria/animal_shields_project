@@ -19,9 +19,11 @@ export class NavbarComponent implements OnInit {
   accessToken: any
   languageCode: any
 
+  selectedPath = ''
   constructor() { }
 
   ngOnInit(): void {
+    this.selectedPath = window.location.href.split('/')[3]
     if (localStorage.getItem('name')) {
       this.myName = localStorage.getItem('name')
     }
@@ -29,8 +31,14 @@ export class NavbarComponent implements OnInit {
       this.accessToken = localStorage.getItem('accessToken')
     }
     if (localStorage.getItem('languageCode')) {
+      console.log('enter')
       this.languageCode = localStorage.getItem('languageCode')
     }
+  }
+
+  navLinkClass(itemName:string) {
+    if(this.selectedPath !== itemName) return 'nav-link'
+    return 'nav-link active'
   }
 
   onLogout() {
@@ -42,6 +50,11 @@ export class NavbarComponent implements OnInit {
     this.myName = ''
     this.accessToken = ''
     window.location.href = window.location.origin + '/login'
+  }
+
+  isAdminAuthenticated(){
+    if( !localStorage.getItem('accessToken') ||  localStorage.getItem('role') !== 'admin') return false
+    return true
   }
 
   onChangeLanguage(event: any) {

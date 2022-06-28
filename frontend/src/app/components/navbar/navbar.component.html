@@ -17,28 +17,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="dashboard">ACASĂ</a>
-                </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link disabled" href="" aria-disabled="true">DESPRE NOI</a>
-                </li> -->
-                <li class="nav-item">
-                    <a class="nav-link" href="adopt" aria-disabled="true">ADOPTĂ</a>
+                <li class="nav-item" *ngIf="isAdminAuthenticated()">
+                    <a class="{{navLinkClass('admin-panel-dashboard')}}" aria-current="page" href="admin-panel-dashboard">ADMINISTRARE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="blog">BLOG</a>
+                    <a class="{{navLinkClass('dashboard')}}" aria-current="page" href="dashboard">ACASĂ</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link disabled" href="" aria-disabled="true">SHOP</a>
-                </li> -->
-                <!-- <li class="nav-item">
-                    <a class="nav-link disabled" href="" aria-disabled="true">CONTACT</a>
-                </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" aria-disabled="true" href="donate">DONEAZĂ</a>
+                    <a class="{{navLinkClass('adopt')}}" href="adopt" aria-disabled="true">CÂINI</a>
+                </li>
+                <li class="nav-item">
+                    <a class="{{navLinkClass('blog')}}" href="blog">BLOG</a>
+                </li>
+
+                <li class="nav-item">
+                    <a c class="{{navLinkClass('donate')}}" aria-disabled="true" href="donate">DONEAZĂ</a>
                 </li>
             </ul>
+           
             <form class="d-flex">
                 <a class="nav-link" *ngIf="!accessToken" href="login" aria-disabled="true">
                     <fa-icon [icon]="faUser" class="user-icon"></fa-icon>
@@ -49,9 +45,9 @@
                     </span>
                     <fa-icon [icon]="faSignOutAlt" class="user-icon"></fa-icon>
                 </a>
-                <select class="form-select" [(ngModel)]="languageCode" (change)="onChangeLanguage($event)" >
-                    <option value="ro">RO <img src="../../assets/ro_flag.png"></option>
-                    <option value="en">EN <img src="../../assets/en_flag.png"></option>
+                <select class="form-select" [(ngModel)]="languageCode" (change)="onChangeLanguage($event)" id="languageCOde" name="roleSelect">
+                    <option value="ro">RO </option><!--  <img src="../../../assets/ro_flag.png" style="width: 30px;height:10px"> -->
+                    <option value="en">EN </option><!-- <img src="../../../assets/en_flag.png"> -->
                 </select>
             </form>
         </div>
