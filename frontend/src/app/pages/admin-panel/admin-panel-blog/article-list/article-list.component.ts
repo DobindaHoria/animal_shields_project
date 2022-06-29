@@ -35,10 +35,14 @@ export class ArticleListComponent implements OnInit {
 
   constructor(private requestService: RequestService, private router: Router, private location: Location,) { }
 
-
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
     this.getAllArticles()
+  }
+
+  buildPicturePath(url: any) {
+    let newUrl =url.slice(7)
+    return `${environment.imageBaseUrl}/${newUrl}`
   }
 
   onFilterArticles() {

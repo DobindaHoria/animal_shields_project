@@ -18,16 +18,6 @@
                             <input type="text" class="form-control" placeholder="Caută după titlu" [(ngModel)]="filterArticle"
                                 (ngModelChange)="onFilterArticles()">
                         </h5>
-
-                        <div class="form-group">
-                            <div class="switch-toggle switch-3 switch-candy" style="height: 30px;"
-                                (change)='getAllArticles()'>
-                                <input id="ro" name="state-d" type="radio" value="ro" [(ngModel)]="selectedLanguage" />
-                                <label for="ro" onclick="">RO</label>
-                                <input id="gb" rome="state-d" type="radio" value="gb" [(ngModel)]="selectedLanguage" />
-                                <label for="gb" onclick="">EN</label>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
