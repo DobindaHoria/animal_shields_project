@@ -16,9 +16,7 @@ export class UsersListComponent implements OnInit {
   role: any = ''
 
   search: any = {
-    firstName: "",
-    lastName: "",
-    department: "",
+    name: "",
     role: ""
   }
 
@@ -48,6 +46,8 @@ export class UsersListComponent implements OnInit {
 
   selectedUserID: any = ''
 
+  filteredUsers:any
+
   constructor(
     private location: Location,
     private requestService: RequestService
@@ -70,38 +70,21 @@ export class UsersListComponent implements OnInit {
   }
 
   onSearch(waitTime = 200) {
-
-    // if (this.searchTimeout)
-    //   window.clearTimeout(this.searchTimeout);
-    //   this.searchTimeout = setTimeout(() => {
-    //   let url = new URL(`${environment.apiUrl}/users?company=${this.company}`);
-    //   if (this.search.first_name.length > 0)
-    //     url.searchParams.append("first_name", this.search.first_name);
-    //   if (this.search.last_name.length > 0)
-    //     url.searchParams.append("last_name", this.search.last_name);
-    //   if (this.search.department.length > 0)
-    //     url.searchParams.append("department", this.search.department);
-    //   if (this.search.role.length > 0) {
-    //     url.searchParams.append("role", this.search.role);
-    //   }
-    //   if (this.search.first_name == '' && this.search.last_name == '' && this.search.department == '' && this.search.role == '') {
-    //     this.users.value = [];
-    //   } else {
-    //     this.requestService.requestGet(url.href, this.users, { "Authorization": `Bearer ${this.token}` }, () => {
-    //       this.searchTimeout = null;
-    //     });
-    //   }
-    // }, waitTime);
-
+    this.filteredUsers = [...this.usersModel.value.users]
+    if(this.search.name) {
+      this.filteredUsers = this.filteredUsers.filter((user: { name: string | any[]; }) => user?.name.includes(this.search.name))
+    }
+    if(this.search.role) {
+      this.filteredUsers = this.filteredUsers.filter((user: { role: string | any[]; }) => user?.role.includes(this.search.role))
+    }
   }
 
   onResetSearch() {
     this.search = {
-      department: "",
-      first_name: "",
-      last_name: "",
+      name: "",
       role: ""
     }
+    this.filteredUsers = [...this.usersModel.value.users]
     this.onSearch(0);
   }
 
@@ -110,7 +93,9 @@ export class UsersListComponent implements OnInit {
   }
 
   getUsers() {
-    return this.requestService.requestGet(`${environment.apiUrl}/users?language=${this.language || 'ro'}`, this.usersModel, { "Authorization": `Bearer ${this.token}` })
+    return this.requestService.requestGet(`${environment.apiUrl}/users?language=${this.language || 'ro'}`, this.usersModel, { "Authorization": `Bearer ${this.token}` }, ()=> {
+      this.filteredUsers = [...this.usersModel.value.users]
+    })
   }
 
   getUserById(userID: string) {

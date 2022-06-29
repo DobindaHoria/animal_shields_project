@@ -31,8 +31,10 @@ export class NavbarComponent implements OnInit {
       this.accessToken = localStorage.getItem('accessToken')
     }
     if (localStorage.getItem('languageCode')) {
-      console.log('enter')
       this.languageCode = localStorage.getItem('languageCode')
+    } else {
+      this.languageCode='ro'
+      localStorage.setItem('languageCode', 'ro')
     }
   }
 

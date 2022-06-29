@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestService } from '../../services/request.service'
 import { environment } from '../../../../src/environments/environment';
+import * as moment from 'moment';
 declare var $: any;
 
 @Component({
@@ -16,6 +17,12 @@ export class AdoptComponent implements OnInit {
   role: any = ''
 
   settingsModel: any = {
+    message: "",
+    error: "",
+    value: null
+  }
+
+  dogByIDModel: any = {
     message: "",
     error: "",
     value: null
@@ -59,6 +66,15 @@ export class AdoptComponent implements OnInit {
     this.getAllDogs()
   }
 
+  showAge(birthDate: any) {
+    if(!birthDate) return '-'
+    return  (+moment().format('YYYY')) - (+ moment(birthDate).format('YYYY')) + ' ani'
+  }
+
+  buildPicturePath(url: any) {
+    let newUrl =url.slice(7)
+    return `${environment.imageBaseUrl}/${newUrl}`
+  }
 
   onChangeGenderFilter(event: any) {
     this.filtersDog.gender = event.target.value || ''
@@ -72,12 +88,15 @@ export class AdoptComponent implements OnInit {
       tempArrayOfDogs = tempArrayOfDogs.filter(dog => (dog.name || '').toLowerCase().includes(this.filtersDog.name.toLowerCase()))
     }
     if (this.filtersDog.gender) {
-    console.log('this.filtersDog.gender', this.filtersDog.gender);
-
       tempArrayOfDogs = tempArrayOfDogs.filter(dog => dog.gender && dog.gender.toLowerCase().includes(this.filtersDog.gender.toLowerCase()))
     }
     this.filteredDogsArray = tempArrayOfDogs
   }
+
+  getDogByID(dogID: any) {
+    return this.requestService.requestGet(`${environment.apiUrl}/dogs/${dogID}`, this.dogByIDModel, { "Authorization": `Bearer ${this.token}` }, () => { })
+  }
+
   onNavigateBack() {
     this.location.back();
   }

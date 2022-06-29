@@ -27,32 +27,33 @@
         </div>
         <div class="col-8">
             <div class="card profile-card">
-                <div class="row" *ngIf="selectedDog" >
-                    <div class="col-3">
-                        <img class="no-picture" *ngIf="!selectedDog?.images?.length" src="../../../assets/No_image_available.png" />
+                <div class="row" *ngIf="this.dogByIDModel.value" >
+                    <div class="col-5">
+                        <img class="no-picture" *ngIf="!this.dogByIDModel?.value?.dog?.images?.length" src="../../../assets/No_image_available.png" />
+                        <img class="picture" *ngIf="this.dogByIDModel?.value?.dog?.images?.length" src="{{buildPicturePath(this.dogByIDModel?.value?.dog?.images[this.dogByIDModel?.value?.dog?.images?.length - 1])}}" />
                     </div>
-                    <div class="col-8" style="margin-left: 20px">
-                        <h1><b>{{selectedDog?.name}}</b></h1>
+                    <div class="col-6" style="margin-left: 20px">
+                        <h1><b>{{this.dogByIDModel.value.name}}</b></h1>
                         <br />
-                        <h5><img src="../../../assets/sex.png" class="dog-info-icon" /><b>SEX:</b> {{selectedDog?.gender || '-'}}</h5>
-                        <h5><img src="../../../assets/varsta.png" class="dog-info-icon"/><b>VĂRSTĂ:</b> {{selectedDog?.name}}</h5>
-                        <h5><img src="../../../assets/talie.png" class="dog-info-icon"/><b>TALIE:</b> {{selectedDog?.talie || '-'}} </h5>
+                        <h5><img src="../../../assets/sex.png" class="dog-info-icon" /><b>SEX:</b> {{this.dogByIDModel?.value?.dog?.gender || '-'}}</h5>
+                        <h5><img src="../../../assets/varsta.png" class="dog-info-icon"/><b>VĂRSTĂ:</b> {{showAge(this.dogByIDModel?.value?.dog?.birth_date)}}</h5>
+                        <h5><img src="../../../assets/talie.png" class="dog-info-icon"/><b>MĂRIME:</b> {{this.dogByIDModel?.value?.dog?.size || '-'}} </h5>
                     </div>
                 </div>
-                <div *ngIf="!selectedDog" >
+                <div *ngIf="!this.dogByIDModel.value" >
                     <h2>Selectează un câine</h2>
                 </div>
             </div>
         </div>
     </div>
     <div class="row dogs-list">
-        <div class="col-3" *ngFor="let dog of filteredDogsArray" (click)="selectedDog=dog">
+        <div class="col-3" *ngFor="let dog of filteredDogsArray" (click)="getDogByID(dog._id)">
             <div class="card dog-card">
                 <h5>{{dog?.name}}</h5>
                 <br />
                 <div class="picture-container">
                     <img class="no-picture" *ngIf="!dog?.images?.length" src="../../../assets/No_image_available.png" />
-
+                    <img class="picture" *ngIf="dog?.images?.length" src="{{buildPicturePath(dog.images[dog.images.length - 1])}}" />
                 </div>
                 <div *ngIf="dog?.gender">
                     {{dog?.gender}}

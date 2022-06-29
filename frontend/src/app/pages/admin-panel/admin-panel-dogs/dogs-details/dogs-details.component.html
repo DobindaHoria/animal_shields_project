@@ -46,6 +46,15 @@
 					</option>
 				</select>
 			</div>
+			<div class="mb-3" class="input-container">
+				<label for="sizeInput" class="form-label">*Mărime:</label>
+				<select name="sizeInput" class="form-select" aria-label="Default select example"
+					[(ngModel)]="dogUpdateBody.size">
+					<option value={{size}} *ngFor="let size of dogSizesModel.value.sizes">
+						{{size}}
+					</option>
+				</select>
+			</div>
 			<div class="form-group">
 				<label>Imagine :</label>
 				<label class="btn custom-input-btn">
@@ -64,7 +73,7 @@
 						</span>
 					</div>
 				</label>
-				<h5 *ngIf="thumbnail && this.thumbnail.imageSrc!=null">{{thumbnail.imageFile.name}}
+				<h5 *ngIf="thumbnail && this.thumbnail.imageSrc!=null">{{thumbnail?.imageFile?.name || ''}}
 				</h5>
 				<button class="btn btn-danger" (click)="SetFile(null);" *ngIf="thumbnail.imageSrc">Șterge</button>
 			</div>
@@ -81,7 +90,7 @@
 					</div>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary create-btn" (click)="onCreateDog()">Modifică</button>
+			<button type="submit" class="btn btn-primary create-btn" (click)="onUpdateDog()">Modifică</button>
 		</form>
 	</div>
 </div>

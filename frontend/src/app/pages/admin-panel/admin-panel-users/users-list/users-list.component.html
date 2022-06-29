@@ -28,22 +28,11 @@
                 <div class="col-sm-6">
                     <h5>Nume:</h5>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" name='lastName' placeholder="ex: Doe"
-                            [(ngModel)]="search.lastName" (ngModelChange)="onSearch()"
+                        <input type="text" class="form-control" name='name' placeholder="ex: Doe"
+                            [(ngModel)]="search.name" (ngModelChange)="onSearch()"
                             [ngModelOptions]="{standalone: true}">
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <h5>Prenume:</h5>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="ex: John" name='firstName'
-                            [(ngModel)]="search.firstName" (ngModelChange)="onSearch()"
-                            [ngModelOptions]="{standalone: true}">
-                    </div>
-                </div>
-
-            </div>
-            <div class="row" *ngIf="settingsModel.value?.User_Roles">
                 <div class="col-sm-6">
                     <h5>Rol:</h5>
                     <select class="form-control" id="role" name="roleSelect" [(ngModel)]="search.role"
@@ -65,7 +54,7 @@
 
     </div>
 
-    <div *ngFor="let user of usersModel?.value?.users">
+    <div *ngFor="let user of filteredUsers">
         <div *ngIf="user.name">
             <div>
                 <div class="card" id="user" style="margin:5px">

@@ -38,7 +38,7 @@ export class RequestService {
               let value = response;
               observer.next({ value: value });
             }
-          }, err => { this.SaveError(err, "GET", { url, headers }); return observer.error(err) },
+          }, err => { return observer.error(err) },
 
           callback);
 
@@ -60,9 +60,6 @@ export class RequestService {
         let formData = new FormData();
         this.ObjectToFormdata(formData, body);
 
-        /* if (config.image.name !== "" && config.image.file !== null)
-          formData.append(config.image.name, config.image.file); */
-
         for (let img of config.images) {
           if (img.name !== "" && img.file !== null) {
             for (let file of img.file) {
@@ -79,7 +76,7 @@ export class RequestService {
       this.http.post<T>(url, requestBody, { headers: new HttpHeaders(headers) })
         .subscribe(
           response => this.ProcessMessageResponse(response, observer),
-          err => { this.SaveError(err, "POST", { url, headers, body }); return observer.error(err) },
+          err => { return observer.error(err) },
           callback);
 
     }).pipe(catchError(this.handleError))
@@ -100,8 +97,14 @@ export class RequestService {
         let formData = new FormData();
         this.ObjectToFormdata(formData, body);
 
-        if (config.image.name !== "" && config.image.file !== null)
-          formData.append(config.image.name, config.image.file);
+        for (let img of config.images) {
+          if (img.name !== "" && img.file !== null) {
+            for (let file of img.file) {
+
+              formData.append(img.name, file.imageFile);
+            }
+          }
+        }
 
         requestBody = formData;
 
@@ -110,7 +113,7 @@ export class RequestService {
       this.http.put<T>(url, requestBody, { headers: new HttpHeaders(headers) })
         .subscribe(
           response => this.ProcessMessageResponse(response, observer),
-          err => { this.SaveError(err, "PUT", { url, headers, body }); return observer.error(err) },
+          err => { return observer.error(err) },
           callback);
 
     }).pipe(catchError(this.handleError))
@@ -128,7 +131,7 @@ export class RequestService {
       this.http.delete<T>(url, { headers: new HttpHeaders(headers) })
         .subscribe(
           response => this.ProcessMessageResponse(response, observer),
-          err => { this.SaveError(err, "DELETE", { url, headers }); return observer.error(err) },
+          err => { return observer.error(err) },
 
           callback);
 
@@ -160,44 +163,7 @@ export class RequestService {
       }
     }
   }
-  private SaveError(error: any, method: any, request: { url: string, headers: any, body?: any }) {
-    let obj = {
-      slug: `${location.pathname.split('/')[1]}`,
-      user_id: `${this.userID}`,
-      app_id: `${this.appID}`,//'5cdc6121e287493ec0da4d17',
-      request_type: method.toLowerCase(),
-      response_status: error.status,
-      response_object: error.error,
-      payload: { obj: "body gol" },
-      headers: request.headers,
-      token: 'nu-este-token',
-      url: {
-        path: 'no-este',
-        params: 'no-este'
-      }
-    }
-
-    if ('Authorization' in request.headers)
-      obj.token = request.headers.Authorization.split(' ')[1];
-
-    if ('body' in request)
-      obj.payload = request.body;
-
-    let u = new URL(request.url);
-
-    obj.url.path = `${u.origin}${u.pathname}`
-    obj.url.params = this.getQueryStringParams(u.search);
-
-    console.log(obj)
-    console.log(`${environment.apiUrl}/error-logs?company=${obj.slug}`)
-
-    this.http.post(`${environment.apiUrl}/error-logs?company=${obj.slug}`, obj).subscribe(data => {
-      console.log(data)
-    });
-
-    localStorage.setItem('eroare', JSON.stringify(obj));
-  }
-
+ 
   private getQueryStringParams(query: any) {
     return query
       ? (/^[?#]/.test(query) ? query.slice(1) : query)

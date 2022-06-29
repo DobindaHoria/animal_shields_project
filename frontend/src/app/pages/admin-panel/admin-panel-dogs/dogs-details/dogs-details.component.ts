@@ -23,6 +23,12 @@ export class DogsDetailsComponent implements OnInit {
     value: null
   }
 
+  dogSizesModel: any = {
+    message: "",
+    error: "",
+    value: null
+  }
+
   dogByIDModel: any = {
     message: "",
     error: "",
@@ -39,6 +45,7 @@ export class DogsDetailsComponent implements OnInit {
     name: '',
     birth_date: '',
     gender: '',
+    size: '',
   }
 
   arrayOfErrors: any = []
@@ -56,6 +63,7 @@ export class DogsDetailsComponent implements OnInit {
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
     if (localStorage.getItem('languageCode')) this.language = localStorage.getItem('languageCode')
     this.getDogByID()
+    this.onGetDogsSizes()
   }
 
   SetFile($ev: any) {
@@ -90,6 +98,9 @@ export class DogsDetailsComponent implements OnInit {
     if (!body.gender || !body.gender) {
       this.arrayOfErrors.push('Vă rugăm să introduceți sexul!')
     }
+    if (!body.size || !body.size) {
+      this.arrayOfErrors.push('Vă rugăm să introduceți talia!')
+    }
 
     if (this.arrayOfErrors.length) return false
     return true
@@ -110,9 +121,14 @@ export class DogsDetailsComponent implements OnInit {
     return this.requestService.requestGet(`${environment.apiUrl}/dogs/${this.dogID}`, this.dogByIDModel, { "Authorization": `Bearer ${this.token}` }, () => {
       if (this.dogByIDModel.value.dog) {
         const formatedDate = moment(this.dogByIDModel.value.dog.birth_date).format('YYYY-MM-DD')
+        if(this.dogByIDModel.value.dog.images.length){
+          this.thumbnail.imageSrc = environment.imageBaseUrl + this.dogByIDModel.value.dog.images[this.dogByIDModel.value.dog.images.length - 1];
+        }
+        
         this.dogUpdateBody = {
           name: this.dogByIDModel.value.dog.name,
           gender: this.dogByIDModel.value.dog.gender,
+          size: this.dogByIDModel.value.dog.size,
           birth_date: {
             year: this.makeItLegitTwo(formatedDate.split('-')[0]),
             month: this.makeItLegitTwo(formatedDate.split('-')[1]),
@@ -123,7 +139,11 @@ export class DogsDetailsComponent implements OnInit {
     })
   }
 
-  onCreateDog() {
+  onGetDogsSizes() {
+		return this.requestService.requestGet(`${environment.apiUrl}/settings/sizes`, this.dogSizesModel, { "Authorization": `Bearer ${this.token}` }, () => {})
+	}
+
+  onUpdateDog() {
     let thumbnail = [this.thumbnail];
 
     if (!this.onValidateFields(this.dogUpdateBody)) return
@@ -133,12 +153,14 @@ export class DogsDetailsComponent implements OnInit {
       birth_date: this.dogUpdateBody.birth_date.year + '-' + this.makeItLegit(this.dogUpdateBody.birth_date.month) + '-' + this.makeItLegit(this.dogUpdateBody.birth_date.day)
     }
 
-    if (thumbnail[0].imageSrc) {
-      return this.requestService.requestPost(`${environment.apiUrl}/dogs`, this.updateDogModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+
+    if (thumbnail[0].imageSrc && thumbnail[0].imageFile) {
+      
+      return this.requestService.requestPut(`${environment.apiUrl}/dogs/${this.dogID}`, this.updateDogModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.updateDogModel.message === 'Procesul a fost executat cu succes' || this.updateDogModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()
-          }, 1500)
+          }, 2500)
         }
       },
         {
@@ -148,11 +170,11 @@ export class DogsDetailsComponent implements OnInit {
           }]
         })
     } else {
-      return this.requestService.requestPost(`${environment.apiUrl}/dogs`, this.updateDogModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+      return this.requestService.requestPut(`${environment.apiUrl}/dogs/${this.dogID}`, this.updateDogModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.updateDogModel.message === 'Procesul a fost executat cu succes' || this.updateDogModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()
-          }, 1500)
+          }, 2500)
         }
       })
     }

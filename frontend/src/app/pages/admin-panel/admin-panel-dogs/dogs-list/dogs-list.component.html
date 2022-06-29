@@ -28,6 +28,7 @@
                 <br />
                 <div class="picture-container">
                     <img class="no-picture" *ngIf="!dog?.images?.length" src="../../../assets/No_image_available.png" />
+                    <img class="picture" *ngIf="dog?.images?.length" src="{{buildPicturePath(dog.images[dog.images.length - 1])}}" />
                 </div>
                 <div *ngIf="dog?.gender">
                     {{dog?.gender}}

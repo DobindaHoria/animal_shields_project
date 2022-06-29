@@ -22,6 +22,12 @@ export class CreateDogComponent implements OnInit {
 		value: null
 	}
 
+	dogSizesModel: any = {
+		message: "",
+		error: "",
+		value: null
+	}
+
 	settingsModel: any = {
 		message: "",
 		error: "",
@@ -32,6 +38,7 @@ export class CreateDogComponent implements OnInit {
 		name: '',
 		birth_date: '',
 		gender: '',
+		size: '',
 	}
 
 	arrayOfErrors: any = []
@@ -46,6 +53,7 @@ export class CreateDogComponent implements OnInit {
 	ngOnInit(): void {
 		if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
 		if (localStorage.getItem('languageCode')) this.language = localStorage.getItem('languageCode')
+		this.onGetDogsSizes()
 	}
 
 	SetFile($ev: any) {
@@ -80,6 +88,9 @@ export class CreateDogComponent implements OnInit {
 		if (!body.gender || !body.gender) {
 			this.arrayOfErrors.push('Vă rugăm să introduceți sexul!')
 		}
+		if (!body.size || !body.size) {
+			this.arrayOfErrors.push('Vă rugăm să introduceți talia!')
+		}
 
 		if (this.arrayOfErrors.length) return false
 		return true
@@ -88,6 +99,10 @@ export class CreateDogComponent implements OnInit {
 	makeItLegit(nr: number) {
 		if(nr<=9) return `0${nr}`
 		else return nr
+	}
+
+	onGetDogsSizes() {
+		return this.requestService.requestGet(`${environment.apiUrl}/settings/sizes`, this.dogSizesModel, { "Authorization": `Bearer ${this.token}` }, () => {})
 	}
 
 	onCreateDog() {

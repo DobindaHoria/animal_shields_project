@@ -41,7 +41,7 @@ export class DogsListComponent implements OnInit {
 
   selectedDogID: any = ''
 
-  constructor( private location: Location, private requestService: RequestService ) { }
+  constructor(private location: Location, private requestService: RequestService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
@@ -51,12 +51,17 @@ export class DogsListComponent implements OnInit {
     this.getAllDogs()
   }
 
+  buildPicturePath(url: any) {
+    let newUrl =url.slice(7)
+    return `${environment.imageBaseUrl}/${newUrl}`
+  }
+
   onNavigateBack() {
     this.location.back();
   }
 
   onNavigateToModifyPage(dogID: any) {
-    window.location.href = window.location.origin+ '/admin-panel-dashboard/update-dog/' + dogID
+    window.location.href = window.location.origin + '/admin-panel-dashboard/update-dog/' + dogID
   }
 
   getAllSettings() {
