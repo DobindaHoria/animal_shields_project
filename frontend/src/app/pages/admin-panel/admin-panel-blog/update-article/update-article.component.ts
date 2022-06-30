@@ -36,20 +36,7 @@ export class UpdateArticleComponent implements OnInit {
   articleUpdateBody: any = {
     published: false,
     sticky: false,
-    text: [
-      {
-        language: 'ro',
-        title: '',
-        content: '',
-        tags: []
-      },
-      {
-        language: 'gb',
-        title: '',
-        content: '',
-        tags: []
-      }
-    ]
+    text: []
   }
 
   arrayOfErrors: any = []
@@ -108,26 +95,49 @@ export class UpdateArticleComponent implements OnInit {
 		if(this.articleByIDModel.value.article.feature_image){
 			this.thumbnail.imageSrc = environment.imageBaseUrl + this.articleByIDModel.value.article.feature_image;
 		  }
+      
         this.articleUpdateBody = {
           published: this.articleByIDModel.value.article.published,
           sticky: this.articleByIDModel.value.article.sticky,
           text: [
             {
               language: 'ro',
-              title: this.articleByIDModel.value.article.texts[0].title,
-              content: this.articleByIDModel.value.article.texts[0].content,
-              tags: this.articleByIDModel.value.article.texts[0].tags
+              title: this.onGetTitle('ro', this.articleByIDModel.value.article.texts),
+              content: this.onGetContent('ro', this.articleByIDModel.value.article.texts),
+              tags: this.onGetTags('ro', this.articleByIDModel.value.article.texts),
             },
             {
               language: 'gb',
-              title: this.articleByIDModel.value.article.texts[1].title,
-              content: this.articleByIDModel.value.article.texts[1].content,
-              tags: this.articleByIDModel.value.article.texts[1].tags
+              title: this.onGetTitle('gb', this.articleByIDModel.value.article.texts),
+              content: this.onGetContent('gb', this.articleByIDModel.value.article.texts),
+              tags: this.onGetTags('gb', this.articleByIDModel.value.article.texts),
             }
           ]
         }
+
       }
     })
+  }
+
+  onGetTitle(language:any, texts:any) {
+    if(!language || !texts?.length) return ''
+    const indexOfText = texts.findIndex((text: { language: any; }) => text.language === language)
+    if(indexOfText === -1) return ''
+    else return texts[indexOfText].title
+  }
+
+  onGetContent(language:any, texts:any) {
+    if(!language || !texts?.length) return ''
+    const indexOfText = texts.findIndex((text: { language: any; }) => text.language === language)
+    if(indexOfText === -1) return ''
+    else return texts[indexOfText].content
+  }
+
+  onGetTags(language:any, texts:any) {
+    if(!language || !texts?.length) return []
+    const indexOfText = texts.findIndex((text: { language: any; }) => text.language === language)
+    if(indexOfText === -1) return []
+    else return texts[indexOfText].tags
   }
 
   onUpdateArticle() {
@@ -135,8 +145,18 @@ export class UpdateArticleComponent implements OnInit {
     this.articleUpdateBody.sticky = (this.articleUpdateBody.sticky === 'true' || this.articleUpdateBody.sticky === true) ? true : false
     this.articleUpdateBody.published = (this.articleUpdateBody.published === 'true' || this.articleUpdateBody.published === true) ? true : false
 
+    
+    let text = this.articleUpdateBody.text.filter((item: { content: any; tags: string | any[]; title: any; }) => item.content && item.tags.length && item.title)
+
+    let updateBody = {
+      ...this.articleUpdateBody,
+      text: text
+    }
+
+    console.log('updateBody', updateBody);
+    
     if (thumbnail[0].imageSrc) {
-      return this.requestService.requestPut(`${environment.apiUrl}/articles/${this.articleID}`, this.updateArticleModel, this.articleUpdateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+      return this.requestService.requestPut(`${environment.apiUrl}/articles/${this.articleID}`, this.updateArticleModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.updateArticleModel.message === 'Procesul a fost executat cu succes' || this.updateArticleModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()
@@ -149,7 +169,7 @@ export class UpdateArticleComponent implements OnInit {
         }]
       })
     } else {
-      return this.requestService.requestPut(`${environment.apiUrl}/articles/${this.articleID}`, this.updateArticleModel, this.articleUpdateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+      return this.requestService.requestPut(`${environment.apiUrl}/articles/${this.articleID}`, this.updateArticleModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.updateArticleModel.message === 'Procesul a fost executat cu succes' || this.updateArticleModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()

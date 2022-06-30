@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { RequestService } from '../../services/request.service';
+import { LanguageService } from '../../services/language.service'
 
 @Component({
   selector: 'app-sign-up',
@@ -26,14 +27,14 @@ export class SignUpComponent implements OnInit {
   errorMessage = ''
   successMessage = ''
 
-  constructor(private requestService: RequestService) { }
+  constructor(public languageService: LanguageService, private requestService: RequestService) { }
 
   ngOnInit(): void {
   }
 
   onValidateFields = () => {
     if (!this.selfSignUpBody.name || !this.selfSignUpBody.email || !this.selfSignUpBody.password) {
-      this.errorMessage = 'Toate câmpurile trebuiesc completate!'
+      this.errorMessage = this.languageService.language.login.warningAllFields
       return false
     } else {
       this.errorMessage = ''
@@ -45,7 +46,7 @@ export class SignUpComponent implements OnInit {
     if (!this.onValidateFields()) return
     return this.requestService.requestPost(`${environment.apiUrl}/users/register`, this.selfSignUpModel, this.selfSignUpBody, {}, () => {
       if (this.selfSignUpModel.message === 'Procesul a fost executat cu succes' || this.selfSignUpModel.message === 'Process completed successfully.') {
-        this.successMessage = 'Vei primi în scurt timp un email pentru confirmare!'
+        this.successMessage = this.languageService.language.login.confirmationMessage
         setTimeout(() => {
           window.location.href = window.location.origin + '/login'
         }, 3500)

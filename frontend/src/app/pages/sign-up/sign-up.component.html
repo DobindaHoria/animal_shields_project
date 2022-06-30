@@ -32,21 +32,21 @@
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
                             <input type="text" name="name" [(ngModel)]="this.selfSignUpBody.name"
-                                class="form-control input_user" placeholder="Nume utilizator">
+                                class="form-control input_user" placeholder="{{languageService.language.login.name}}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
                             <input type="text" name="email" [(ngModel)]="this.selfSignUpBody.email"
-                                class="form-control input_user" placeholder="Email">
+                                class="form-control input_user" placeholder="{{languageService.language.login.email}}">
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
                             <input type="password" [(ngModel)]="this.selfSignUpBody.password" name="password"
-                                class="form-control input_pass" placeholder="Parola">
+                                class="form-control input_pass" placeholder="{{languageService.language.login.password}}">
                         </div>
                     </form>
                 </div>
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="d-flex justify-content-center mt-3 login_container">
-                    <button type="button" name="button" class="btn login_btn" (click)="onSignUp()">Creează cont</button>
+                    <button type="button" name="button" class="btn login_btn" (click)="onSignUp()">{{languageService.language.login.createAccount}}</button>
                 </div>
                 <div class="mt-4">
                     <div class="d-flex justify-content-center links">

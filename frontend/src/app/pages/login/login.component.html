@@ -32,14 +32,14 @@
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
 							<input type="text" name="email" [(ngModel)]="loginBody.email"
-								class="form-control input_user" placeholder="Email">
+								class="form-control input_user" placeholder="{{languageService.language.login.email}}">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
 							<input type="password" [(ngModel)]="loginBody.password" name="password"
-								class="form-control input_pass" placeholder="Parola">
+								class="form-control input_pass" placeholder="{{languageService.language.login.password}}">
 						</div>
 					</form>
 				</div>
@@ -50,14 +50,14 @@
 					{{this.loginModel.error}}
 				</div>
 				<div class="d-flex justify-content-center mt-3 login_container">
-					<button type="button" name="button" class="btn login_btn" (click)="onLogin()">Logare</button>
+					<button type="button" name="button" class="btn login_btn" (click)="onLogin()">{{languageService.language.login.logInBtn}}</button>
 				</div>
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
-						Nu ai un cont? <a href="sign-up" class="ml-2">Creează cont</a>
+						{{languageService.language.login.dontHaveAccount}} <a href="sign-up" class="ml-2">{{languageService.language.login.createAccount}}</a>
 					</div>
 					<div class="d-flex justify-content-center links">
-						<a href="forgot-password">Ai uitat parola?</a>
+						<a href="forgot-password">{{languageService.language.login.forgotPassoword}}</a>
 					</div>
 				</div>
 			</div>
