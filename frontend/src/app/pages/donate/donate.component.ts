@@ -40,7 +40,7 @@ export class DonateComponent implements OnInit {
     this.eurPaymentValue = ((this.paymentValue / 4.95).toFixed(2)).toString() 
     this.payPalConfig = {
       currency: "EUR",
-      clientId: "AYvU7p49APJ3TWCP7EPq6Z1Sm7LijDirPdDI-G6DjNasJ2tyIVCwb0IZL1v5cKy_tw7qPr_2ybS62gCR",
+      clientId: "AVhHIwu1OhSHeAxnJrD_9g2KcwFe7bzjoqlE3TUc_suXZsm2OMy_gcK2gqLPLVNXK3Ji_UEkC45WkFUO",
       createOrderOnClient: (data: any) =>
         <ICreateOrderRequest>{
           intent: "CAPTURE",

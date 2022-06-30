@@ -52,7 +52,7 @@ export class BlogComponent implements OnInit {
 
   getAllArticles() {
     return this.requestService.requestGet(`${environment.apiUrl}/articles?language=${this.selectedLanguage}`, this.articlesModel, {}, ()=> {
-      this.filteredArticles = [...this.articlesModel.value.articles].filter(article => article.published)
+      this.filteredArticles = [...this.articlesModel.value.articles].filter(article => article.published && article.texts.length)
     })
   }
 

@@ -98,8 +98,14 @@ export class CreateArticleComponent implements OnInit {
     this.articleCreateBody.sticky = this.articleCreateBody.sticky === 'true' ? true : false
     this.articleCreateBody.published = this.articleCreateBody.published === 'true' ? true : false
 
+	let text = this.articleCreateBody.text.filter((item: { content: any; tags: string | any[]; title: any; }) => item.content && item.tags.length && item.title)
+
+	let createBody = {
+		...this.articleCreateBody,
+		text: text
+	}
     if (thumbnail[0].imageSrc) {
-      return this.requestService.requestPost(`${environment.apiUrl}/articles`, this.createArticleModel, this.articleCreateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+      return this.requestService.requestPost(`${environment.apiUrl}/articles`, this.createArticleModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.createArticleModel.message === 'Procesul a fost executat cu succes' || this.createArticleModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()
@@ -112,7 +118,7 @@ export class CreateArticleComponent implements OnInit {
         }]
       })
     } else {
-      return this.requestService.requestPost(`${environment.apiUrl}/articles`, this.createArticleModel, this.articleCreateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+      return this.requestService.requestPost(`${environment.apiUrl}/articles`, this.createArticleModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.createArticleModel.message === 'Procesul a fost executat cu succes' || this.createArticleModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()
