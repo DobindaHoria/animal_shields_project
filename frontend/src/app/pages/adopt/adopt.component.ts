@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { RequestService } from '../../services/request.service'
 import { environment } from '../../../../src/environments/environment';
+import { LanguageService } from '../../services/language.service'
+
 import * as moment from 'moment';
 declare var $: any;
 
@@ -57,7 +59,7 @@ export class AdoptComponent implements OnInit {
 
   filteredDogsArray: any = []
 
-  constructor(private location: Location, private requestService: RequestService) { }
+  constructor(private location: Location, private requestService: RequestService, public languageService: LanguageService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')

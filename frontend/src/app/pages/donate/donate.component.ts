@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ICreateOrderRequest } from "ngx-paypal";
+import { LanguageService } from '../../services/language.service'
 declare var $: any;
 
 @Component({
@@ -8,6 +9,8 @@ declare var $: any;
   styleUrls: ['./donate.component.scss']
 })
 export class DonateComponent implements OnInit {
+  language: any = ''
+
   public payPalConfig: any;
   public showPaypalButtons: any;
 
@@ -17,9 +20,12 @@ export class DonateComponent implements OnInit {
   paymentErrorMessage = ''
   paymentSuccessMessage = ''
 
-  constructor() { }
+  constructor(public languageService: LanguageService) { }
 
- ngOnInit() {}
+ ngOnInit() {
+	if (localStorage.getItem('languageCode')) this.language = localStorage.getItem('languageCode')
+	else this.language='ro'
+ }
 
   pay() {
     this.showPaypalButtons = true;
@@ -91,7 +97,7 @@ export class DonateComponent implements OnInit {
         });
       },
       onClientAuthorization: (data: any) => {
-        this.paymentSuccessMessage = "Felicitări, tocmai ai efectuat tranzacția cu succes! Îți mulțumim pentru sprijinul acordat!"
+        this.paymentSuccessMessage = `${this.languageService.language.donatePage.modal.succesMessage}`
         setTimeout(()=> {
           this.onClearModalData()
           $('#paymentModal').modal('hide');
@@ -102,11 +108,11 @@ export class DonateComponent implements OnInit {
         // );
       },
       onCancel: (data:any, actions:any) => {
-        this.paymentErrorMessage = "Ne pare râu, dar tranzacția a fost anulată!"
+        this.paymentErrorMessage = `${this.languageService.language.donatePage.modal.canceledMessage}`
         // console.log("OnCancel", data, actions);
       },
       onError: (err: any) => {
-        this.paymentErrorMessage = "Ne pare râu, dar a apărut o eroare!"
+        this.paymentErrorMessage =`${this.languageService.language.donatePage.modal.errorMessage}`
         // console.log("OnError", err);
       },
       onClick: (data: any, actions: any) => {

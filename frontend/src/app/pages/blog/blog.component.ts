@@ -3,6 +3,8 @@ import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { RequestService } from '../../services/request.service';
 import { Location } from '@angular/common';
+import { LanguageService } from '../../services/language.service'
+
 declare var $: any;
 
 @Component({
@@ -33,7 +35,7 @@ export class BlogComponent implements OnInit {
 
   filterArticle: any = ''
 
-  constructor(private requestService: RequestService, private router: Router, private location: Location,) { }
+  constructor(private requestService: RequestService, private router: Router, private location: Location, public languageService: LanguageService) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')

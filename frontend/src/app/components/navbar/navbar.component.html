@@ -18,20 +18,20 @@
         <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item" *ngIf="isAdminAuthenticated()">
-                    <a class="{{navLinkClass('admin-panel-dashboard')}}" aria-current="page" href="admin-panel-dashboard">ADMINISTRARE</a>
+                    <a class="{{navLinkClass('admin-panel-dashboard')}}" aria-current="page" href="admin-panel-dashboard">{{languageService.language.navbar.adminPanel}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="{{navLinkClass('dashboard')}}" aria-current="page" href="dashboard">ACASĂ</a>
+                    <a class="{{navLinkClass('dashboard')}}" aria-current="page" href="dashboard">{{languageService.language.navbar.home}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="{{navLinkClass('adopt')}}" href="adopt" aria-disabled="true">CÂINI</a>
+                    <a class="{{navLinkClass('adopt')}}" href="adopt" aria-disabled="true">{{languageService.language.navbar.dogs}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="{{navLinkClass('blog')}}" href="blog">BLOG</a>
+                    <a class="{{navLinkClass('blog')}}" href="blog">{{languageService.language.navbar.blog}}</a>
                 </li>
 
                 <li class="nav-item">
-                    <a c class="{{navLinkClass('donate')}}" aria-disabled="true" href="donate">DONEAZĂ</a>
+                    <a c class="{{navLinkClass('donate')}}" aria-disabled="true" href="donate">{{languageService.language.navbar.donate}}</a>
                 </li>
             </ul>
            

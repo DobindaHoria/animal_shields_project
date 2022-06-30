@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col">
 			<h2 style="margin-left: auto;margin-right: auto">
-				Listă câini
+				{{languageService.language.dogs.title}}
 			</h2>
 		</div>
 	</div>
@@ -10,20 +10,20 @@
 	<div class="row">
 		<div class="col-4">
 			<div class="card search-card">
-				<h5>Filtre:</h5>
+				<h5>{{languageService.language.dogs.filterPane.title}}:</h5>
 				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Caută câine după nume" name="filterDogName" [(ngModel)]="filtersDog.name" (ngModelChange)="onFilterDogs()">
+					<input type="text" class="form-control" placeholder="{{languageService.language.dogs.filterPane.namePlaceholder}}" name="filterDogName" [(ngModel)]="filtersDog.name" (ngModelChange)="onFilterDogs()">
 				</div>
 				<div class="input-group mb-3">
-					<select name="genderInput" class="form-select" aria-label="Default select example" placeholder="Caută câine după nume"  [(ngModel)]="filtersDog.gender" (change)="onChangeGenderFilter($event)">
-						<option selected value="">Caută câine după sex</option>
-						<option value="M">Mascul</option>
-						<option value="F">Femelă</option>
+					<select name="genderInput" class="form-select" aria-label="Default select example"  [(ngModel)]="filtersDog.gender" (change)="onChangeGenderFilter($event)">
+						<option selected value="">{{languageService.language.dogs.filterPane.sexPlaceholder}}</option>
+						<option value="M">M</option>
+						<option value="F">F</option>
 					</select>
 				</div>
 				<div class="input-group mb-3">
-					<select name="sizeInput" class="form-select" aria-label="Default select example" placeholder="Caută câine după talie" [(ngModel)]="filtersDog.size" (change)="onChangeSizeFilter($event)">
-						<option selected value="">Caută câine după talie</option>
+					<select name="sizeInput" class="form-select" aria-label="Default select example"  [(ngModel)]="filtersDog.size" (change)="onChangeSizeFilter($event)">
+						<option selected value="">{{languageService.language.dogs.filterPane.sizePlaceholder}}</option>
 						<option value="< 7kg">< 7kg</option>
 						<option value="7-14kg">7-14kg</option>
 						<option value="15-25kg">15-25kg</option>
@@ -32,7 +32,7 @@
 					</select>
 				</div>
 				<button class="btn btn-raised btn-danger" (click)="onResetSearch()">
-					Resetează filtrele
+					{{languageService.language.dogs.filterPane.resetBtn}}
 				</button>
 			</div>
 		</div>
@@ -46,13 +46,13 @@
 					<div class="col-6" style="margin-left: 20px">
 						<h1><b>{{this.dogByIDModel?.value?.dog?.name}}</b></h1>
 						<br />
-						<h5><img src="../../../assets/sex.png" class="dog-info-icon" /><b>SEX:</b> {{this.dogByIDModel?.value?.dog?.gender || '-'}}</h5>
-						<h5><img src="../../../assets/varsta.png" class="dog-info-icon" /><b>VĂRSTĂ:</b> {{showAge(this.dogByIDModel?.value?.dog?.birth_date)}}</h5>
-						<h5><img src="../../../assets/talie.png" class="dog-info-icon" /><b>MĂRIME:</b> {{this.dogByIDModel?.value?.dog?.size || '-'}} </h5>
+						<h5><img src="../../../assets/sex.png" class="dog-info-icon" /><b>{{languageService.language.dogs.profileCard.sex}}:</b> {{this.dogByIDModel?.value?.dog?.gender || '-'}}</h5>
+						<h5><img src="../../../assets/varsta.png" class="dog-info-icon" /><b>{{languageService.language.dogs.profileCard.age}}:</b> {{showAge(this.dogByIDModel?.value?.dog?.birth_date)}}</h5>
+						<h5><img src="../../../assets/talie.png" class="dog-info-icon" /><b>{{languageService.language.dogs.profileCard.size}}:</b> {{this.dogByIDModel?.value?.dog?.size || '-'}} </h5>
 					</div>
 				</div>
 				<div *ngIf="!this.dogByIDModel.value">
-					<h2>Selectează un câine</h2>
+					<h2>{{languageService.language.dogs.profileCard.placeholder}}</h2>
 				</div>
 			</div>
 		</div>
@@ -66,8 +66,8 @@
 					<img class="no-picture" *ngIf="!dog?.images?.length" src="../../../assets/No_image_available.png" />
 					<img class="picture" *ngIf="dog?.images?.length" src="{{buildPicturePath(dog.images[dog.images.length - 1])}}" />
 				</div>
-				<b>Sex:</b> {{dog?.gender || '-'}}
-				<b>Talie:</b> {{dog?.size || '-'}}
+				<b>{{languageService.language.dogs.dogCardList.sex}}:</b> {{dog?.gender || '-'}}
+				<b>{{languageService.language.dogs.dogCardList.size}}:</b> {{dog?.size || '-'}}
 			</div>
 		</div>
 	</div>

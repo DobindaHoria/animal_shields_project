@@ -5,7 +5,7 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <span class="title-page">Articole</span>
+                <span class="title-page">{{languageService.language.blog.title}}</span>
             </div>
         </div>
         <hr>
@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <input type="text" class="form-control" placeholder="Caută după titlu" [(ngModel)]="filterArticle"
+                            <input type="text" class="form-control" placeholder="{{languageService.language.blog.filterPlaceholder}}" [(ngModel)]="filterArticle"
                                 (ngModelChange)="onFilterArticles()">
                         </h5>
                     </div>
@@ -40,7 +40,7 @@
                             </div>
                         </div>
 
-                        <span class="p-3"><b>Creat:
+                        <span class="p-3"><b>{{languageService.language.blog.created}}:
                             </b>{{article.date | date : 'dd MMM. yyyy, HH:mm'}}</span>
                         <div class="row p-3">
                             <div class="col-sm-6 ">
@@ -52,7 +52,7 @@
 
                             <div class="col-sm-6 ">
                                     <a class="readAll" (click)="NavigateToArticle(article._id)"
-                                        style="color:#1B315D;float:right;font-weight: 600;">Citește tot articolul...</a>
+                                        style="color:#1B315D;float:right;font-weight: 600;">{{languageService.language.blog.readAllArticle}}</a>
                                 </div>
 
                         </div>

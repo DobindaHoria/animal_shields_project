@@ -6,7 +6,7 @@
 				<span style="font-size:30px;font-family: 'Open Sans', sans-serif;font-weight: 600;color:#052a30;">{{getTitle(articleByIDModel.value.article)}}</span>
 			</div>
 			<div class="col-sm-6">
-				<button type="button" class="btn" style="float:right" (click)="backClicked()" style="text-shadow: 0px 2px 2px rgba(149, 150, 150, 0.66);float:right;color: white; background: #F17A32"> &laquo; Înapoi</button>
+				<button type="button" class="btn" style="float:right" (click)="backClicked()" style="text-shadow: 0px 2px 2px rgba(149, 150, 150, 0.66);float:right;color: white; background: #F17A32"> &laquo;   {{languageService.language.blog.back}}</button>
 			</div>
 		</div>
 		<hr style="background-color: black ">
@@ -31,7 +31,7 @@
 					</p>
 				</div>
 			</div>
-			<span class="p-3"><b>Data: </b>{{articleByIDModel.value.article.date | date : 'dd MMM. yyyy, HH:mm'}}</span>
+			<span class="p-3"><b>{{languageService.language.blog.created}}: </b>{{articleByIDModel.value.article.date | date : 'dd MMM. yyyy, HH:mm'}}</span>
 		</div>
 	</div>
 </div>

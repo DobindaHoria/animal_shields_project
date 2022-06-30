@@ -4,7 +4,7 @@ import { environment } from '../../../environments/environment';
 import { RequestService } from '../../services/request.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-
+import { LanguageService } from '../../services/language.service'
 
 @Component({
   selector: 'app-article-details',
@@ -21,7 +21,7 @@ export class ArticleDetailsComponent implements OnInit {
     error: "",
   }
 
-  constructor(private location: Location, private route: ActivatedRoute, private requestService: RequestService, private router: Router) { }
+  constructor(private location: Location, private route: ActivatedRoute, private requestService: RequestService, private router: Router, public languageService: LanguageService) { }
 
   ngOnInit(): void {
     if (window.location.href.split('/')[4]) this.articleID = window.location.href.split('/')[4]
