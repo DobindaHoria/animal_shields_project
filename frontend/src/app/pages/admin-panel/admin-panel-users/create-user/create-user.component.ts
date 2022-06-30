@@ -77,7 +77,7 @@ export class CreateUserComponent implements OnInit {
 
   onCreateUser() {
     if(!this.onValidateFields(this.userCreateBody)) return
-    return this.requestService.requestPost(`${environment.apiUrl}/users/register`, this.createUserModel, this.userCreateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+    return this.requestService.requestPost(`${environment.apiUrl}/users/register?language=${this.language}`, this.createUserModel, this.userCreateBody, { "Authorization": `Bearer ${this.token}` }, () => {
       if(this.createUserModel.message === 'Procesul a fost executat cu succes' || this.createUserModel.message === 'Process completed successfully.') {
         setTimeout(()=> {
           this.onNavigateBack()

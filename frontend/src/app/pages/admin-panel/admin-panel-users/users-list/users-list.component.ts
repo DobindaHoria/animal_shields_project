@@ -105,7 +105,7 @@ export class UsersListComponent implements OnInit {
 
   onDeleteUser() {
     if (!this.selectedUserID) return
-    return this.requestService.requestDelete(`${environment.apiUrl}/users/${this.selectedUserID}`, this.deleteUserModel, { "Authorization": `Bearer ${this.token}` }, () => {
+    return this.requestService.requestDelete(`${environment.apiUrl}/users/${this.selectedUserID}?language=${this.language}`, this.deleteUserModel, { "Authorization": `Bearer ${this.token}` }, () => {
       if (this.deleteUserModel.message === 'Procesul a fost executat cu succes' || this.deleteUserModel.message === 'Process completed successfully.') {
         this.selectedUserID = ''
         setTimeout(() => {

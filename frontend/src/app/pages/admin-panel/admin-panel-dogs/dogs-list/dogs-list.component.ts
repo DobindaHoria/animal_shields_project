@@ -79,7 +79,7 @@ export class DogsListComponent implements OnInit {
 
   onDeleteDog() {
     if (!this.selectedDogID) return
-    return this.requestService.requestDelete(`${environment.apiUrl}/dogs/${this.selectedDogID}`, this.deleteDogModel, { "Authorization": `Bearer ${this.token}` }, () => {
+    return this.requestService.requestDelete(`${environment.apiUrl}/dogs/${this.selectedDogID}?language=${this.language}`, this.deleteDogModel, { "Authorization": `Bearer ${this.token}` }, () => {
       if (this.deleteDogModel.message === 'Procesul a fost executat cu succes' || this.deleteDogModel.message === 'Process completed successfully.') {
         this.selectedDogID = ''
         setTimeout(() => {

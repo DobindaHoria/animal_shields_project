@@ -9,7 +9,7 @@ import { environment } from '../../../../../../src/environments/environment';
   styleUrls: ['./update-user.component.scss']
 })
 export class UpdateUserComponent implements OnInit {
-
+  language: any = ''
   token: any = ''
   userID: any = ''
 
@@ -45,6 +45,7 @@ export class UpdateUserComponent implements OnInit {
 
   ngOnInit(): void {
     if (window.location.href.split('/')[5]) this.userID = window.location.href.split('/')[5]
+    if (localStorage.getItem('languageCode')) this.language = localStorage.getItem('languageCode')
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
     this.getAllSettings()
     this.getUserById()
@@ -83,7 +84,7 @@ export class UpdateUserComponent implements OnInit {
 
   onUpdateUser() {
     if (!this.onValidateFields(this.userUpdateBody)) return
-    return this.requestService.requestPut(`${environment.apiUrl}/users/${this.userID}`, this.updateUserModel, this.userUpdateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+    return this.requestService.requestPut(`${environment.apiUrl}/users/${this.userID}?language=${this.language}`, this.updateUserModel, this.userUpdateBody, { "Authorization": `Bearer ${this.token}` }, () => {
       if (this.updateUserModel.message === 'Procesul a fost executat cu succes' || this.updateUserModel.message === 'Process completed successfully.') {
         setTimeout(() => {
           this.onNavigateBack()

@@ -156,7 +156,7 @@ export class UpdateArticleComponent implements OnInit {
     console.log('updateBody', updateBody);
     
     if (thumbnail[0].imageSrc) {
-      return this.requestService.requestPut(`${environment.apiUrl}/articles/${this.articleID}`, this.updateArticleModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+      return this.requestService.requestPut(`${environment.apiUrl}/articles/${this.articleID}?language=${this.language}`, this.updateArticleModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.updateArticleModel.message === 'Procesul a fost executat cu succes' || this.updateArticleModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()
@@ -169,7 +169,7 @@ export class UpdateArticleComponent implements OnInit {
         }]
       })
     } else {
-      return this.requestService.requestPut(`${environment.apiUrl}/articles/${this.articleID}`, this.updateArticleModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+      return this.requestService.requestPut(`${environment.apiUrl}/articles/${this.articleID}?language=${this.language}`, this.updateArticleModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.updateArticleModel.message === 'Procesul a fost executat cu succes' || this.updateArticleModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()

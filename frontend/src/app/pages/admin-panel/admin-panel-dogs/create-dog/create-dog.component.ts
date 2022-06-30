@@ -116,7 +116,7 @@ export class CreateDogComponent implements OnInit {
 		}
 		
 		if (thumbnail[0].imageSrc) {
-			return this.requestService.requestPost(`${environment.apiUrl}/dogs`, this.createDogModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
+			return this.requestService.requestPost(`${environment.apiUrl}/dogs?language=${this.language}`, this.createDogModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
 				if (this.createDogModel.message === 'Procesul a fost executat cu succes' || this.createDogModel.message === 'Process completed successfully.') {
 					setTimeout(() => {
 						this.onNavigateBack()
@@ -130,7 +130,7 @@ export class CreateDogComponent implements OnInit {
 					}]
 				})
 		} else {
-			return this.requestService.requestPost(`${environment.apiUrl}/dogs`, this.createDogModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
+			return this.requestService.requestPost(`${environment.apiUrl}/dogs?language=${this.language}`, this.createDogModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
 				if (this.createDogModel.message === 'Procesul a fost executat cu succes' || this.createDogModel.message === 'Process completed successfully.') {
 					setTimeout(() => {
 						this.onNavigateBack()

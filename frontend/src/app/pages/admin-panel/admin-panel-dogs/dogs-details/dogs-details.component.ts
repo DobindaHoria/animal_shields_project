@@ -155,7 +155,7 @@ export class DogsDetailsComponent implements OnInit {
 
 		if (thumbnail[0].imageSrc && thumbnail[0].imageFile) {
 
-			return this.requestService.requestPut(`${environment.apiUrl}/dogs/${this.dogID}`, this.updateDogModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+			return this.requestService.requestPut(`${environment.apiUrl}/dogs/${this.dogID}?language=${this.language}`, this.updateDogModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
 				if (this.updateDogModel.message === 'Procesul a fost executat cu succes' || this.updateDogModel.message === 'Process completed successfully.') {
 					setTimeout(() => {
 						this.onNavigateBack()
@@ -169,7 +169,7 @@ export class DogsDetailsComponent implements OnInit {
 					}]
 				})
 		} else {
-			return this.requestService.requestPut(`${environment.apiUrl}/dogs/${this.dogID}`, this.updateDogModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
+			return this.requestService.requestPut(`${environment.apiUrl}/dogs/${this.dogID}?language=${this.language}`, this.updateDogModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
 				if (this.updateDogModel.message === 'Procesul a fost executat cu succes' || this.updateDogModel.message === 'Process completed successfully.') {
 					setTimeout(() => {
 						this.onNavigateBack()

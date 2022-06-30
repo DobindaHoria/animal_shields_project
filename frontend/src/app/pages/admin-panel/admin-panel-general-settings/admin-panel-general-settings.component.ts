@@ -11,6 +11,7 @@ declare var $: any;
 })
 export class AdminPanelGeneralSettingsComponent implements OnInit {
   token: any = ''
+  language: any = ''
 
   settingsModel: any = {
     message: "",
@@ -39,6 +40,7 @@ export class AdminPanelGeneralSettingsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('languageCode')) this.language = localStorage.getItem('languageCode')
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
     this.getAllSettings()
   }
@@ -73,7 +75,7 @@ export class AdminPanelGeneralSettingsComponent implements OnInit {
       newTags: newTags
     }
 
-    return this.requestService.requestPut(`${environment.apiUrl}/settings`, this.updateSettingsModel, body, { "Authorization": `Bearer ${this.token}` }, () => {
+    return this.requestService.requestPut(`${environment.apiUrl}/settings?language=${this.language}`, this.updateSettingsModel, body, { "Authorization": `Bearer ${this.token}` }, () => {
       if (this.updateSettingsModel.message === 'Procesul a fost executat cu succes' || this.updateSettingsModel.message === 'Process completed successfully.') {
         setTimeout(() => {
           $('#editTagModal').modal('hide');

@@ -12,6 +12,7 @@ declare var $: any;
 })
 export class ArticleListComponent implements OnInit {
   token: any = ''
+  language: any = ''
 
   articlesModel: any = {
     value: [],
@@ -36,6 +37,7 @@ export class ArticleListComponent implements OnInit {
   constructor(private requestService: RequestService, private router: Router, private location: Location,) { }
 
   ngOnInit(): void {
+    if (localStorage.getItem('languageCode')) this.language = localStorage.getItem('languageCode')
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
     this.getAllArticles()
   }
@@ -75,7 +77,7 @@ export class ArticleListComponent implements OnInit {
 
   onDeleteArticle() {
     if (!this.selectedArticleID) return
-    return this.requestService.requestDelete(`${environment.apiUrl}/articles/${this.selectedArticleID}`, this.deleteArticleModel, { "Authorization": `Bearer ${this.token}` }, () => {
+    return this.requestService.requestDelete(`${environment.apiUrl}/articles/${this.selectedArticleID}?language=${this.language}`, this.deleteArticleModel, { "Authorization": `Bearer ${this.token}` }, () => {
       if (this.deleteArticleModel.message === 'Procesul a fost executat cu succes' || this.deleteArticleModel.message === 'Process completed successfully.') {
         this.selectedArticleID = ''
         setTimeout(() => {

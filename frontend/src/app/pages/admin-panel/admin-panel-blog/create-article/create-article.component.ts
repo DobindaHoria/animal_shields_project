@@ -105,7 +105,7 @@ export class CreateArticleComponent implements OnInit {
 		text: text
 	}
     if (thumbnail[0].imageSrc) {
-      return this.requestService.requestPost(`${environment.apiUrl}/articles`, this.createArticleModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
+      return this.requestService.requestPost(`${environment.apiUrl}/articles?language=${this.language}`, this.createArticleModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.createArticleModel.message === 'Procesul a fost executat cu succes' || this.createArticleModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()
@@ -118,7 +118,7 @@ export class CreateArticleComponent implements OnInit {
         }]
       })
     } else {
-      return this.requestService.requestPost(`${environment.apiUrl}/articles`, this.createArticleModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
+      return this.requestService.requestPost(`${environment.apiUrl}/articles?language=${this.language}`, this.createArticleModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.createArticleModel.message === 'Procesul a fost executat cu succes' || this.createArticleModel.message === 'Process completed successfully.') {
           setTimeout(() => {
             this.onNavigateBack()
