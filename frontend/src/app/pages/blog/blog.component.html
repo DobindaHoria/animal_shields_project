@@ -31,7 +31,14 @@
                         <div class="container" style="text-align:center;">
                             <hr />
                         </div>
-                        <span class="p-3" [innerHTML]="getContent(article)"></span>
+						<div class="row" style="padding: 20px">
+                            <div class="col-3" *ngIf="article.feature_image">
+                                <img class="article-picture" src="{{buildPicturePath(article.feature_image)}}" />
+                            </div>
+                            <div class="{{article.feature_image ? 'col-9' : 'col-12'}}" >
+                                <span style="margin: 10px" [innerHTML]="getContent(article)"></span>
+                            </div>
+                        </div>
 
                         <span class="p-3"><b>Creat:
                             </b>{{article.date | date : 'dd MMM. yyyy, HH:mm'}}</span>

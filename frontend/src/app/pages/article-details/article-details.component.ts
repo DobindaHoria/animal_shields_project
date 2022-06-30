@@ -29,6 +29,11 @@ export class ArticleDetailsComponent implements OnInit {
     this.getArticleById()
   }
 
+  buildPicturePath(url: any) {
+    let newUrl =url.slice(7)
+    return `${environment.imageBaseUrl}/${newUrl}`
+  }
+
   getTitle(article: any) {
     if (!article.texts.length) return '-'
     const selectedText = article.texts.find((text: { language: string; }) => text.language === this.articleID.split('-')[1])

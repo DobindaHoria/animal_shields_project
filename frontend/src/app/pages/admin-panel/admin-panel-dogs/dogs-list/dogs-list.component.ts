@@ -48,7 +48,7 @@ export class DogsListComponent implements OnInit {
     if (localStorage.getItem('languageCode')) this.language = localStorage.getItem('languageCode')
     if (localStorage.getItem('role')) this.role = localStorage.getItem('role')
     this.getAllSettings()
-    this.getAllDogs()
+	this.getAllDogs()
   }
 
   buildPicturePath(url: any) {
@@ -57,7 +57,7 @@ export class DogsListComponent implements OnInit {
   }
 
   onNavigateBack() {
-    this.location.back();
+    window.location.href = `${environment.url}/admin-panel-dashboard`
   }
 
   onNavigateToModifyPage(dogID: any) {

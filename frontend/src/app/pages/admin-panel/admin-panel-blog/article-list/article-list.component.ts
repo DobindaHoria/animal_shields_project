@@ -88,7 +88,7 @@ export class ArticleListComponent implements OnInit {
   }
 
   onNavigateBack() {
-    this.location.back();
+	window.location.href = `${environment.url}/admin-panel-dashboard`
   }
 
   NavigateToArticleUpdate(articleID: string) {

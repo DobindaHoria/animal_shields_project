@@ -22,9 +22,8 @@ export class LoginComponent implements OnInit {
   }
 
   loginBody = {
-    email: 'paula.blaga1711@gmail.com',
-    password: 'zaq1@WSX',
-    language: 'ro'
+    email: '',
+    password: '',
   }
 
   errorMessage = ''

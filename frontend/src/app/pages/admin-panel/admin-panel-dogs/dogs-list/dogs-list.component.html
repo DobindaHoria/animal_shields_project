@@ -1,73 +1,60 @@
 <div class="container">
-
-    <div class="row">
-        <div class="col">
-            <h2 style="margin-left: auto;margin-right: auto;margin-top:20px;">
-                Listă câini
-            </h2>
-        </div>
-        <div class="col">
-            <button type="button"
-                style="float:right;margin-top:20px;color:white;background: #F17A32;border:none;cursor:pointer"
-                class="btn btn-raised btn-primary" routerLink="/admin-panel-dashboard/create-dog"> +
-                Creează câine
-            </button>
-            <button type="button back-btn"
-                style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer"
-                class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
-                Înapoi
-            </button>
-        </div>
-    </div>
-    <hr style="background-color: black ">
-
-    <div class="row">
-        <div class="col-4" *ngFor="let dog of dogsModel?.value?.dogs">
-            <div class="card dog-card">
-                <h5>{{dog?.name}}</h5>
-                <br />
-                <div class="picture-container">
-                    <img class="no-picture" *ngIf="!dog?.images?.length" src="../../../assets/No_image_available.png" />
-                    <img class="picture" *ngIf="dog?.images?.length" src="{{buildPicturePath(dog.images[dog.images.length - 1])}}" />
-                </div>
-                <div *ngIf="dog?.gender">
-                    {{dog?.gender}}
-                </div>
-                <div style="margin-top: 50px">
-                    <button type="button back-btn"
-                        style="margin-right: 20px; color:white;background: #F17A32;border:none;cursor:pointer"
-                        class="btn btn-raised btn-primary" (click)="onNavigateToModifyPage(dog._id)">
-                        Modifică
-                    </button>
-                    <button class="btn btn-raised btn-danger" (click)="this.selectedDogID=dog?._id"
-                        data-bs-toggle="modal" data-bs-target="#deleteDogModal">
-                        Șterge
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DELETE DOG MODAL -->
-    <div class="modal fade" id="deleteDogModal" tabindex="-1" aria-labelledby="deleteDogModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteUserModal">Avertisment</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Ești sigur că dorești să ștergi acest câine?</p>
-                </div>
-
-                <div class="alert alert-success" role="alert" *ngIf="this.deleteDogModel.message">
-                    {{this.deleteDogModel.message}}
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
-                    <button type="button" class="btn btn-danger" (click)="onDeleteDog()">Șterge</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col">
+			<h2 style="margin-left: auto;margin-right: auto;margin-top:20px;">
+				Listă câini
+			</h2>
+		</div>
+		<div class="col">
+			<button type="button" style="float:right;margin-top:20px;color:white;background: #F17A32;border:none;cursor:pointer" class="btn btn-raised btn-primary" routerLink="/admin-panel-dashboard/create-dog"> +
+				Creează câine
+			</button>
+			<button type="button back-btn" style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer" class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
+				Înapoi
+			</button>
+		</div>
+	</div>
+	<hr style="background-color: black ">
+	<div class="row">
+		<div class="col-4" *ngFor="let dog of dogsModel?.value?.dogs">
+			<div class="card dog-card">
+				<h5>{{dog?.name}}</h5>
+				<br />
+				<div class="picture-container">
+					<img class="no-picture" *ngIf="!dog?.images?.length" src="../../../assets/No_image_available.png" />
+					<img class="picture" *ngIf="dog?.images?.length" src="{{buildPicturePath(dog.images[dog.images.length - 1])}}" />
+				</div>
+				<b>Sex:</b> {{dog?.gender || '-'}}
+				<b>Talie:</b> {{dog?.size || '-'}}
+				<div style="margin-top: 10px">
+					<button type="button back-btn" style="margin-right: 20px; color:white;background: #F17A32;border:none;cursor:pointer" class="btn btn-raised btn-primary" (click)="onNavigateToModifyPage(dog._id)">
+						Modifică
+					</button>
+					<button class="btn btn-raised btn-danger" (click)="this.selectedDogID=dog?._id" data-bs-toggle="modal" data-bs-target="#deleteDogModal">
+						Șterge
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- DELETE DOG MODAL -->
+	<div class="modal fade" id="deleteDogModal" tabindex="-1" aria-labelledby="deleteDogModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="deleteUserModal">Avertisment</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Ești sigur că dorești să ștergi acest câine?</p>
+				</div>
+				<div class="alert alert-success" role="alert" *ngIf="this.deleteDogModel.message">
+					{{this.deleteDogModel.message}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
+					<button type="button" class="btn btn-danger" (click)="onDeleteDog()">Șterge</button>
+				</div>
+			</div>
+		</div>
+	</div>

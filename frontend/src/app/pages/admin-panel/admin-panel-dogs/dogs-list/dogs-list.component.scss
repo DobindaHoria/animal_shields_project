@@ -7,12 +7,14 @@
         width: 100%;
         text-align: center;
         .no-picture {
-            max-width: 120px;
-            height: auto;
+			width: 60%;
+            height: 200px;
+			background-size: cover;
         }
         .picture {
             width: 90%;
-            height: 115px
+            height: 200px;
+			background-size: cover;
         }
     }
 }

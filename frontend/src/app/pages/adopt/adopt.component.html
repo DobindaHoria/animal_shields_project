@@ -1,63 +1,73 @@
 <div class="container">
-
-    <div class="row">
-        <div class="col">
-            <h2 style="margin-left: auto;margin-right: auto">
-                Listă câini
-            </h2>
-        </div>
-    </div>
-    <hr style="background-color: black ">
-    <div class="row">
-        <div class="col-4">
-            <div class="card search-card">
-                <h5>Filtre:</h5>
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Caută căine după nume" name="filterDogName" [(ngModel)]="filtersDog.name" (ngModelChange)="onFilterDogs()">
-                </div>
-                <div class="input-group mb-3">
-                    <select name="genderInput" class="form-select" aria-label="Default select example" placeholder="Caută căine după nume" (change)="onChangeGenderFilter($event)"
->
-                    <option selected value="">Caută căine după sex</option>
-                    <option value="M">Mascul</option>
-                    <option value="F">Femelă</option>
-                </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="card profile-card">
-                <div class="row" *ngIf="this.dogByIDModel.value" >
-                    <div class="col-5">
-                        <img class="no-picture" *ngIf="!this.dogByIDModel?.value?.dog?.images?.length" src="../../../assets/No_image_available.png" />
-                        <img class="picture" *ngIf="this.dogByIDModel?.value?.dog?.images?.length" src="{{buildPicturePath(this.dogByIDModel?.value?.dog?.images[this.dogByIDModel?.value?.dog?.images?.length - 1])}}" />
-                    </div>
-                    <div class="col-6" style="margin-left: 20px">
-                        <h1><b>{{this.dogByIDModel.value.name}}</b></h1>
-                        <br />
-                        <h5><img src="../../../assets/sex.png" class="dog-info-icon" /><b>SEX:</b> {{this.dogByIDModel?.value?.dog?.gender || '-'}}</h5>
-                        <h5><img src="../../../assets/varsta.png" class="dog-info-icon"/><b>VĂRSTĂ:</b> {{showAge(this.dogByIDModel?.value?.dog?.birth_date)}}</h5>
-                        <h5><img src="../../../assets/talie.png" class="dog-info-icon"/><b>MĂRIME:</b> {{this.dogByIDModel?.value?.dog?.size || '-'}} </h5>
-                    </div>
-                </div>
-                <div *ngIf="!this.dogByIDModel.value" >
-                    <h2>Selectează un câine</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row dogs-list">
-        <div class="col-3" *ngFor="let dog of filteredDogsArray" (click)="getDogByID(dog._id)">
-            <div class="card dog-card">
-                <h5>{{dog?.name}}</h5>
-                <br />
-                <div class="picture-container">
-                    <img class="no-picture" *ngIf="!dog?.images?.length" src="../../../assets/No_image_available.png" />
-                    <img class="picture" *ngIf="dog?.images?.length" src="{{buildPicturePath(dog.images[dog.images.length - 1])}}" />
-                </div>
-                <div *ngIf="dog?.gender">
-                    {{dog?.gender}}
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col">
+			<h2 style="margin-left: auto;margin-right: auto">
+				Listă câini
+			</h2>
+		</div>
+	</div>
+	<hr style="background-color: black ">
+	<div class="row">
+		<div class="col-4">
+			<div class="card search-card">
+				<h5>Filtre:</h5>
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" placeholder="Caută câine după nume" name="filterDogName" [(ngModel)]="filtersDog.name" (ngModelChange)="onFilterDogs()">
+				</div>
+				<div class="input-group mb-3">
+					<select name="genderInput" class="form-select" aria-label="Default select example" placeholder="Caută câine după nume"  [(ngModel)]="filtersDog.gender" (change)="onChangeGenderFilter($event)">
+						<option selected value="">Caută câine după sex</option>
+						<option value="M">Mascul</option>
+						<option value="F">Femelă</option>
+					</select>
+				</div>
+				<div class="input-group mb-3">
+					<select name="sizeInput" class="form-select" aria-label="Default select example" placeholder="Caută câine după talie" [(ngModel)]="filtersDog.size" (change)="onChangeSizeFilter($event)">
+						<option selected value="">Caută câine după talie</option>
+						<option value="< 7kg">< 7kg</option>
+						<option value="7-14kg">7-14kg</option>
+						<option value="15-25kg">15-25kg</option>
+						<option value="26-40kg">26-40kg</option>
+						<option value="> 40kg">> 40kg</option>
+					</select>
+				</div>
+				<button class="btn btn-raised btn-danger" (click)="onResetSearch()">
+					Resetează filtrele
+				</button>
+			</div>
+		</div>
+		<div class="col-8">
+			<div class="card profile-card">
+				<div class="row" *ngIf="this.dogByIDModel.value">
+					<div class="col-5">
+						<img class="no-picture" *ngIf="!this.dogByIDModel?.value?.dog?.images?.length" src="../../../assets/No_image_available.png" />
+						<img class="picture" *ngIf="this.dogByIDModel?.value?.dog?.images?.length" src="{{buildPicturePath(this.dogByIDModel?.value?.dog?.images[this.dogByIDModel?.value?.dog?.images?.length - 1])}}" />
+					</div>
+					<div class="col-6" style="margin-left: 20px">
+						<h1><b>{{this.dogByIDModel?.value?.dog?.name}}</b></h1>
+						<br />
+						<h5><img src="../../../assets/sex.png" class="dog-info-icon" /><b>SEX:</b> {{this.dogByIDModel?.value?.dog?.gender || '-'}}</h5>
+						<h5><img src="../../../assets/varsta.png" class="dog-info-icon" /><b>VĂRSTĂ:</b> {{showAge(this.dogByIDModel?.value?.dog?.birth_date)}}</h5>
+						<h5><img src="../../../assets/talie.png" class="dog-info-icon" /><b>MĂRIME:</b> {{this.dogByIDModel?.value?.dog?.size || '-'}} </h5>
+					</div>
+				</div>
+				<div *ngIf="!this.dogByIDModel.value">
+					<h2>Selectează un câine</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row dogs-list">
+		<div class="col-4" *ngFor="let dog of filteredDogsArray" (click)="getDogByID(dog._id)">
+			<div class="card dog-card">
+				<h5>{{dog?.name}}</h5>
+				<br />
+				<div class="picture-container">
+					<img class="no-picture" *ngIf="!dog?.images?.length" src="../../../assets/No_image_available.png" />
+					<img class="picture" *ngIf="dog?.images?.length" src="{{buildPicturePath(dog.images[dog.images.length - 1])}}" />
+				</div>
+				<b>Sex:</b> {{dog?.gender || '-'}}
+				<b>Talie:</b> {{dog?.size || '-'}}
+			</div>
+		</div>
+	</div>

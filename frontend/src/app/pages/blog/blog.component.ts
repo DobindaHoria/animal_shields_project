@@ -41,6 +41,11 @@ export class BlogComponent implements OnInit {
     this.getAllArticles()
   }
 
+  buildPicturePath(url: any) {
+    let newUrl =url.slice(7)
+    return `${environment.imageBaseUrl}/${newUrl}`
+  }
+
   onFilterArticles() {
     this.filteredArticles = [...this.articlesModel.value.articles].filter(article => (article.texts[0].title.toLowerCase()).includes(this.filterArticle.toLowerCase()) && article.published)
   }

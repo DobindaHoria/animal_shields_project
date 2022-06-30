@@ -86,7 +86,7 @@ export class CreateArticleComponent implements OnInit {
   }
 
   onNavigateBack() {
-    this.location.back();
+    window.location.href = `${environment.url}/admin-panel-dashboard/articles`
   }
 
   getAllSettings() {

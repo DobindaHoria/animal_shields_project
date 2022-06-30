@@ -46,7 +46,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   onNavigateBack() {
-    this.location.back();
+    window.location.href = `${environment.url}/admin-panel-dashboard/users-list`
   }
 
   onValidateFields(body: any) {

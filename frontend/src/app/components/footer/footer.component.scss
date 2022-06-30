@@ -1,61 +1,86 @@
 .footer-container {
-    background: #F17A32;
-    width: 100%;
-    .title {
-        text-align: center;
-        margin: auto;
-        color: white;
-        font-weight: 800;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 32px;
-    }
-    .social-media-icons {
-        text-align: center;
-        margin-left: -45px;
-        margin-top: -30px;
-        .social-media-icon {
-            color: white;
-            font-size: 50px;
-            margin-left: 50px;
-        }
-        .social-media-icon:hover {
-            cursor: pointer;
-            color: black;
-        }
-    }
-    .logo-container {
-        text-align: right;
-        .logo {
-            width: 50%;
-        }
-    }
-    .address-container {
-        color: white;
-        font-weight: 600;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 14px;
-        margin-top: 10px;
-    }
-    .navbar-list {
-        color: white;
-        font-weight: 600;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 14px;
-        margin-top: 10px;
-        .item:hover{ 
-            color: black;
-            cursor: pointer;
-        }
-    }
-    .donate-container {
-        color: white;
-        font-weight: 600;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 14px;
-        margin-top: 10px;
-        .item:hover{ 
-            color: black;
-            cursor: pointer;
-        }
-    }
+	background: #F17A32;
+	width: 100%;
+
+	.title {
+		text-align: center;
+		margin: auto;
+		color: white;
+		font-weight: 800;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 32px;
+	}
+
+	.social-media-icons {
+		text-align: center;
+		margin-left: -45px;
+		margin-top: -30px;
+
+		.social-media-icon {
+			color: white;
+			font-size: 50px;
+			margin-left: 50px;
+		}
+
+		.social-media-icon:hover {
+			cursor: pointer;
+			color: black;
+		}
+	}
+
+	.logo-container {
+		text-align: right;
+
+		.logo {
+			width: 50%;
+		}
+	}
+
+	.address-container {
+		color: white;
+		font-weight: 600;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 14px;
+		margin-top: 10px;
+	}
+
+	.navbar-list {
+		color: white;
+		font-weight: 600;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 14px;
+		margin-top: 10px;
+
+		.item {
+			a {
+				text-decoration: none;
+				color: white;
+			}
+
+			a:hover {
+				color: black;
+				cursor: pointer;
+			}
+		}
+	}
+
+	.donate-container {
+		color: white;
+		font-weight: 600;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 14px;
+		margin-top: 10px;
+
+		.item {
+			a {
+				color: white;
+				text-decoration: none;
+			}
+
+			a:hover {
+				color: black;
+				cursor: pointer;
+			}
+		}
+	}
 }

@@ -62,7 +62,7 @@ export class UsersListComponent implements OnInit {
   }
 
   onNavigateBack() {
-    this.location.back();
+    window.location.href = `${environment.url}/admin-panel-dashboard`
   }
 
   onNavigateToModifyPage(userID: any) {

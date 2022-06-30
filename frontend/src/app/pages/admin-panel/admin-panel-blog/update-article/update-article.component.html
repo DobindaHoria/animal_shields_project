@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label for="tagInputRO" class="form-label">*Etichete:</label>
                     <form>
-                        <div *ngFor="let data of this.settingsModel.value.Article_tags[0]?.tags">
+                        <div *ngFor="let data of this.settingsModel?.value.Article_tags[0]?.tags">
                             <input type="checkbox" [checked]="articleUpdateBody.text[0].tags.indexOf(data)>-1" (change)="onChangeTagsArray(0, data)"> {{data}}<br>
                         </div>
                     </form>
@@ -97,7 +97,7 @@
 						</span>
 					</div>
 				</label>
-				<h5 *ngIf="thumbnail && this.thumbnail.imageSrc!=null">{{thumbnail.imageFile.name}}
+				<h5 *ngIf="thumbnail && this.thumbnail.imageSrc!=null">{{thumbnail?.imageFile?.name}}
 				</h5>
 				<button class="btn btn-danger" (click)="SetFile(null);" *ngIf="thumbnail.imageSrc">Șterge</button>
 			</div>

@@ -32,7 +32,6 @@
                             <input type="text" class="form-control" placeholder="Caută după titlu"
                                 [(ngModel)]="filterArticle" (ngModelChange)="onFilterArticles()">
                         </h5>
-
                         <div class="form-group">
                             <div class="switch-toggle switch-3 switch-candy" style="height: 30px;"
                                 (change)='getAllArticles()'>
@@ -79,7 +78,7 @@
                         </div>
                         <div class="row" style="padding: 20px">
                             <div class="col-3" *ngIf="article.feature_image">
-                                <img src="{{buildPicturePath(article.feature_image)}}" />
+                                <img class="article-picture" src="{{buildPicturePath(article.feature_image)}}" />
                             </div>
                             <div class="{{article.feature_image ? 'col-9' : 'col-12'}}" >
                                 <span style="margin: 10px" [innerHTML]="getContent(article)"></span>

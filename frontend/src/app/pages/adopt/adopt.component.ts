@@ -51,7 +51,8 @@ export class AdoptComponent implements OnInit {
 
   filtersDog: any = {
     gender: '',
-    name: ''
+    name: '',
+	size: '',
   }
 
   filteredDogsArray: any = []
@@ -81,6 +82,11 @@ export class AdoptComponent implements OnInit {
     this.onFilterDogs()
   }
 
+  onChangeSizeFilter(event: any) {
+    this.filtersDog.size = event.target.value || ''
+    this.onFilterDogs()
+  }
+
   onFilterDogs() {
     let tempArrayOfDogs = [...this.dogsModel.value.dogs]
     
@@ -90,7 +96,19 @@ export class AdoptComponent implements OnInit {
     if (this.filtersDog.gender) {
       tempArrayOfDogs = tempArrayOfDogs.filter(dog => dog.gender && dog.gender.toLowerCase().includes(this.filtersDog.gender.toLowerCase()))
     }
+    if (this.filtersDog.size) {
+      tempArrayOfDogs = tempArrayOfDogs.filter(dog => dog.size && dog.size.toLowerCase().includes(this.filtersDog.size.toLowerCase()))
+    }
     this.filteredDogsArray = tempArrayOfDogs
+  }
+
+  onResetSearch() {
+    this.filtersDog = {
+		gender: '',
+		name: '',
+		size: '',
+    }
+    this.filteredDogsArray = [...this.dogsModel.value.dogs]
   }
 
   getDogByID(dogID: any) {

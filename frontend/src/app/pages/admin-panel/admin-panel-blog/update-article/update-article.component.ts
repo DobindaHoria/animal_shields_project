@@ -95,7 +95,7 @@ export class UpdateArticleComponent implements OnInit {
   }
 
   onNavigateBack() {
-    this.location.back();
+    window.location.href = `${environment.url}/admin-panel-dashboard/articles`
   }
 
   getAllSettings() {
@@ -105,8 +105,9 @@ export class UpdateArticleComponent implements OnInit {
   getArticleById() {
     return this.requestService.requestGet(`${environment.apiUrl}/articles/${this.articleID}`, this.articleByIDModel, { "Authorization": `Bearer ${this.token}` }, ()=> {
       if(this.articleByIDModel.value.article) {
-        // console.log('test', this.articleByIDModel.value.article);
-        
+		if(this.articleByIDModel.value.article.feature_image){
+			this.thumbnail.imageSrc = environment.imageBaseUrl + this.articleByIDModel.value.article.feature_image;
+		  }
         this.articleUpdateBody = {
           published: this.articleByIDModel.value.article.published,
           sticky: this.articleByIDModel.value.article.sticky,
@@ -125,9 +126,6 @@ export class UpdateArticleComponent implements OnInit {
             }
           ]
         }
-
-        console.log('test2', this.articleUpdateBody );
-        
       }
     })
   }
