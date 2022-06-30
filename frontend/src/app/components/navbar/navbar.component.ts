@@ -45,7 +45,11 @@ export class NavbarComponent implements OnInit {
 			this.languageCode = 'ro'
 			localStorage.setItem('languageCode', 'ro')
 		}
-		this.onGetLanguage()
+		if(localStorage.getItem('languageBody')) {
+			this.languageService.language = JSON.parse(localStorage.getItem('languageBody') || '')
+		} else {
+			this.onGetLanguage()
+		}
 	}
 
 	navLinkClass(itemName: string) {
@@ -72,15 +76,17 @@ export class NavbarComponent implements OnInit {
 	onGetLanguage() {
 		return this.requestService.requestGet(`${environment.apiUrl}/front-labels/${this.languageCode}?language=ro`, this.languageModel, {}, () => { 
 			this.languageService.language = this.languageModel.value.label.text
+			localStorage.setItem('languageBody', JSON.stringify(this.languageModel.value.label.text))
+			window.location.reload()
 		})
 		
 	}
 
 	onChangeLanguage(event: any) {
+		
 		if (!event.target.value) return
 		this.languageCode = event.target.value
 		localStorage.setItem('languageCode', event.target.value)
 		this.onGetLanguage()
-		window.location.reload()
 	}
 }

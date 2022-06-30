@@ -40,8 +40,6 @@ export class ForgotPasswordComponent implements OnInit {
   onForgotPassword = () => {
     if (!this.onValidateFields()) return
     return this.requestService.requestPost(`${environment.apiUrl}/users/forgot-password`, this.forgotPasswordModel, this.forgotPasswordBody, {}, () => {
-      console.log('ewnteeeer');
-      
       if (this.forgotPasswordModel.message === 'Procesul a fost executat cu succes' || this.forgotPasswordModel.message === 'Process completed successfully.') {
         this.successMessage = 'Vei primi în scurt timp un email pentru confirmare!'
         setTimeout(() => {

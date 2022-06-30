@@ -36,7 +36,9 @@
                                 <img class="article-picture" src="{{buildPicturePath(article.feature_image)}}" />
                             </div>
                             <div class="{{article.feature_image ? 'col-9' : 'col-12'}}" >
-                                <span style="margin: 10px" [innerHTML]="getContent(article)"></span>
+                                <span style="margin: 10px">
+                                    {{ (getContent(article).length>200)? (getContent(article) | slice:0:370)+'..':(getContent(article)) }}
+                                </span>
                             </div>
                         </div>
 

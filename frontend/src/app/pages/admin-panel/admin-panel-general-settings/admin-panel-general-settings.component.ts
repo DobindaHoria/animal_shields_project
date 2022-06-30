@@ -50,7 +50,6 @@ export class AdminPanelGeneralSettingsComponent implements OnInit {
   getAllSettings() {
     return this.requestService.requestGet(`${environment.apiUrl}/settings`, this.settingsModel, { "Authorization": `Bearer ${this.token}` }, () => {
       if (this.settingsModel.value.Article_tags) {
-        console.log(this.settingsModel.value.Article_tags)
         for (let item of this.settingsModel.value.Article_tags) {
           if (item.language === 'ro') {
             this.arrayOfROTags = item.tags
@@ -65,12 +64,7 @@ export class AdminPanelGeneralSettingsComponent implements OnInit {
   onUpdateTags() {
     let newTags = this.selectedTag.language === 'ro' ? [...this.arrayOfROTags] : [...this.arrayOfENTags]
 
-    console.log(this.selectedTag);
-
     if (this.selectedTag.index !== null) {
-      console.log('NewTags', newTags);
-      console.log('this.selectedTag.index', this.selectedTag.index);
-
       newTags[this.selectedTag.index] = this.selectedTag.name
     }
 

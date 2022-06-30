@@ -46,8 +46,8 @@ export class CreateDogComponent implements OnInit {
 	thumbnail: any = { imageFile: undefined, imageSrc: undefined, inputModel: undefined };
 
 	constructor(private location: Location, private requestService: RequestService, config: NgbDatepickerConfig) {
-		config.minDate = { year: 1900, month: 1, day: 1 };
-		config.maxDate = { year: 2099, month: 12, day: 31 };
+		config.minDate = { year: 1990, month: 1, day: 1 };
+		config.maxDate = { year: 2022, month: 12, day: 31 };
 	}
 
 	ngOnInit(): void {

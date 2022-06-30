@@ -41,8 +41,6 @@ export class AuthService {
   public handleAuthentication(): void {
     
     this.auth0.parseHash((err, authResult) => {
-    console.log('enteeer');
-
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.localLogin(authResult);

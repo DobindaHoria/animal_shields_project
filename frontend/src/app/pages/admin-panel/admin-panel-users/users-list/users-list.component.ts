@@ -72,10 +72,10 @@ export class UsersListComponent implements OnInit {
   onSearch(waitTime = 200) {
     this.filteredUsers = [...this.usersModel.value.users]
     if(this.search.name) {
-      this.filteredUsers = this.filteredUsers.filter((user: { name: string | any[]; }) => user?.name.includes(this.search.name))
+      this.filteredUsers = this.filteredUsers.filter((user: { name: any }) => user?.name?.toLowerCase()?.includes(this.search.name.toLowerCase()))
     }
     if(this.search.role) {
-      this.filteredUsers = this.filteredUsers.filter((user: { role: string | any[]; }) => user?.role.includes(this.search.role))
+      this.filteredUsers = this.filteredUsers.filter((user: { role: any; }) => user?.role?.toLowerCase()?.includes(this.search.role.toLowerCase()))
     }
   }
 
