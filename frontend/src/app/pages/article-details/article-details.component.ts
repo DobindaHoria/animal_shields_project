@@ -14,7 +14,7 @@ import { LanguageService } from '../../services/language.service'
 export class ArticleDetailsComponent implements OnInit {
   token: any = ''
   articleID: any = ''
-
+  language: any = ''
   articleByIDModel: any = {
     value: [],
     message: "",
@@ -26,6 +26,9 @@ export class ArticleDetailsComponent implements OnInit {
   ngOnInit(): void {
     if (window.location.href.split('/')[4]) this.articleID = window.location.href.split('/')[4]
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
+    if (localStorage.getItem('languageCode')) this.language = localStorage.getItem('languageCode')
+    else this.language='ro'
+  
     this.getArticleById()
   }
 
@@ -35,25 +38,25 @@ export class ArticleDetailsComponent implements OnInit {
   }
 
   getTitle(article: any) {
-    if (!article.texts.length) return '-'
+    if (!article) return '-'
     const selectedText = article.texts.find((text: { language: string; }) => text.language === this.articleID.split('-')[1])
     return selectedText.title || '-'
   }
 
   getContent(article: any) {
-    if (!article.texts.length) return '-'
+    if (!article) return '-'
     const selectedText = article.texts.find((text: { language: string; }) => text.language === this.articleID.split('-')[1])
     return selectedText.content || '-'
   }
 
   getTags(article: any) {
-    if (!article.texts.length) return '-'
+    if (!article) return '-'
     const selectedText = article.texts.find((text: { language: string; }) => text.language === this.articleID.split('-')[1])
     return selectedText.tags || []
   }
 
   getArticleById() {
-    return this.requestService.requestGet(`${environment.apiUrl}/articles/${this.articleID.split('-')[0]}`, this.articleByIDModel, { "Authorization": `Bearer ${this.token}` });
+    return this.requestService.requestGet(`${environment.apiUrl}/articles/${this.articleID.split('-')[0]}?language=${this.language}`, this.articleByIDModel, {} );
   }
 
   backClicked() {
