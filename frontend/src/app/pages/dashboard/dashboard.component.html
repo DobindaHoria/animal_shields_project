@@ -23,7 +23,74 @@
     <br />
     <br />
     <br />
-    <img class="main-banner" src="../../../assets/dashboard_secondary_banner.png" />
+    <div class="container" style="text-align: center">
+        <h1> <b>{{languageService.language.home.activity.title}}</b> </h1>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-6" style="text-align: right">
+                <h1>{{languageService.language.home.activity.subtitleOne}}</h1>
+                <br />
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-6">
+                        <div class="activity-content" >
+                            {{languageService.language.home.activity.contentOne}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6" style="text-align: left">
+                <img class="activity-picture" src="../../../assets/activityOne.png"/>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-6" style="text-align: right">
+                <img class="activity-picture" src="../../../assets/activityTwo.png"/>
+            </div>
+            <div class="col-6" style="text-align: left">
+                <h1>{{languageService.language.home.activity.subtitleTwo}}</h1>
+                <br />
+                <div class="row">
+                    <div class="col-6">
+                        <div class="activity-content" >
+                            {{languageService.language.home.activity.contentTwo}}
+                        </div>
+                    </div>
+                    <div class="col-6">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-6" style="text-align: right">
+                <h1>{{languageService.language.home.activity.subtitleThree}}</h1>
+                <br />
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-6">
+                        <div class="activity-content" >
+                            {{languageService.language.home.activity.contentThree}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6" style="text-align: left">
+                <img class="activity-picture" src="../../../assets/activityThree.png"/>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+    <!-- <img class="main-banner" src="../../../assets/dashboard_secondary_banner.png" /> -->
     <br />
     <br />
     <br />
@@ -32,7 +99,7 @@
             {{languageService.language.home.helpUsTitle}}
         </div>
         <div class="content">
-			{{languageService.language.home.helpUsContent}}
+            {{languageService.language.home.helpUsContent}}
         </div>
         <br />
         <div class="button donate-btn" (click)="onNavigateDonatePage()">

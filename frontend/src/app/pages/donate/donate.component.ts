@@ -24,7 +24,6 @@ export class DonateComponent implements OnInit {
 
  ngOnInit() {
 	if (localStorage.getItem('languageCode')) this.language = localStorage.getItem('languageCode')
-	else this.language='ro'
  }
 
   pay() {
