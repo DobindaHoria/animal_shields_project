@@ -90,12 +90,14 @@ export class UpdateArticleComponent implements OnInit {
   }
 
   getArticleById() {
-    return this.requestService.requestGet(`${environment.apiUrl}/articles/${this.articleID}`, this.articleByIDModel, { "Authorization": `Bearer ${this.token}` }, ()=> {
-      if(this.articleByIDModel.value.article) {
-		if(this.articleByIDModel.value.article.feature_image){
-			this.thumbnail.imageSrc = environment.imageBaseUrl + this.articleByIDModel.value.article.feature_image;
-		  }
-      
+    return this.requestService.requestGet(`${environment.apiUrl}/articles/${this.articleID}`, this.articleByIDModel, { "Authorization": `Bearer ${this.token}` }, () => {
+      if (this.articleByIDModel.value.article) {
+        console.log('this.articleByIDModel.value.article', this.articleByIDModel.value.article);
+        
+        if (this.articleByIDModel.value.article.feature_image) {
+          this.thumbnail.imageSrc = environment.imageBaseUrl + this.articleByIDModel.value.article.feature_image;
+        }
+
         this.articleUpdateBody = {
           published: this.articleByIDModel.value.article.published,
           sticky: this.articleByIDModel.value.article.sticky,
@@ -119,24 +121,24 @@ export class UpdateArticleComponent implements OnInit {
     })
   }
 
-  onGetTitle(language:any, texts:any) {
-    if(!language || !texts?.length) return ''
+  onGetTitle(language: any, texts: any) {
+    if (!language || !texts?.length) return ''
     const indexOfText = texts.findIndex((text: { language: any; }) => text.language === language)
-    if(indexOfText === -1) return ''
+    if (indexOfText === -1) return ''
     else return texts[indexOfText].title
   }
 
-  onGetContent(language:any, texts:any) {
-    if(!language || !texts?.length) return ''
+  onGetContent(language: any, texts: any) {
+    if (!language || !texts?.length) return ''
     const indexOfText = texts.findIndex((text: { language: any; }) => text.language === language)
-    if(indexOfText === -1) return ''
+    if (indexOfText === -1) return ''
     else return texts[indexOfText].content
   }
 
-  onGetTags(language:any, texts:any) {
-    if(!language || !texts?.length) return []
+  onGetTags(language: any, texts: any) {
+    if (!language || !texts?.length) return []
     const indexOfText = texts.findIndex((text: { language: any; }) => text.language === language)
-    if(indexOfText === -1) return []
+    if (indexOfText === -1) return []
     else return texts[indexOfText].tags
   }
 
@@ -145,7 +147,7 @@ export class UpdateArticleComponent implements OnInit {
     this.articleUpdateBody.sticky = (this.articleUpdateBody.sticky === 'true' || this.articleUpdateBody.sticky === true) ? true : false
     this.articleUpdateBody.published = (this.articleUpdateBody.published === 'true' || this.articleUpdateBody.published === true) ? true : false
 
-    
+
     let text = this.articleUpdateBody.text.filter((item: { content: any; tags: string | any[]; title: any; }) => item.content && item.tags.length && item.title)
 
     let updateBody = {
@@ -154,8 +156,8 @@ export class UpdateArticleComponent implements OnInit {
     }
 
     console.log('updateBody', updateBody);
-    
-    if (thumbnail[0].imageSrc) {
+
+    /* if (thumbnail[0].imageSrc) {
       return this.requestService.requestPut(`${environment.apiUrl}/articles/${this.articleID}?language=${this.language}`, this.updateArticleModel, updateBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.updateArticleModel.message === 'Procesul a fost executat cu succes' || this.updateArticleModel.message === 'Process completed successfully.') {
           setTimeout(() => {
@@ -176,7 +178,7 @@ export class UpdateArticleComponent implements OnInit {
           }, 1500)
         }
       })
-    }
+    } */
   }
 
 }

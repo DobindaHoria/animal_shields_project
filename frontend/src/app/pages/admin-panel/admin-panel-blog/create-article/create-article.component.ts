@@ -104,6 +104,7 @@ export class CreateArticleComponent implements OnInit {
 		...this.articleCreateBody,
 		text: text
 	}
+
     if (thumbnail[0].imageSrc) {
       return this.requestService.requestPost(`${environment.apiUrl}/articles?language=${this.language}`, this.createArticleModel, createBody, { "Authorization": `Bearer ${this.token}` }, () => {
         if (this.createArticleModel.message === 'Procesul a fost executat cu succes' || this.createArticleModel.message === 'Process completed successfully.') {

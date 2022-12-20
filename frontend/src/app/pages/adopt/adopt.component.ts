@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { RequestService } from '../../services/request.service'
 import { environment } from '../../../../src/environments/environment';
 import { LanguageService } from '../../services/language.service'
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import * as moment from 'moment';
 declare var $: any;
@@ -10,7 +11,8 @@ declare var $: any;
 @Component({
   selector: 'app-adopt',
   templateUrl: './adopt.component.html',
-  styleUrls: ['./adopt.component.scss']
+  styleUrls: ['./adopt.component.scss'],
+  providers: [NgbCarouselConfig]
 })
 export class AdoptComponent implements OnInit {
 
@@ -54,12 +56,16 @@ export class AdoptComponent implements OnInit {
   filtersDog: any = {
     gender: '',
     name: '',
-	size: '',
+    size: '',
   }
 
   filteredDogsArray: any = []
 
-  constructor(private location: Location, private requestService: RequestService, public languageService: LanguageService) { }
+  constructor(private location: Location, private requestService: RequestService, public languageService: LanguageService, config: NgbCarouselConfig) {
+    config.interval = 2000;
+    config.keyboard = true;
+    config.pauseOnHover = true;
+  }
 
   ngOnInit(): void {
     if (localStorage.getItem('accessToken')) this.token = localStorage.getItem('accessToken')
@@ -70,12 +76,12 @@ export class AdoptComponent implements OnInit {
   }
 
   showAge(birthDate: any) {
-    if(!birthDate) return '-'
-    return  (+moment().format('YYYY')) - (+ moment(birthDate).format('YYYY')) + ' ani'
+    if (!birthDate) return '-'
+    return (+moment().format('YYYY')) - (+ moment(birthDate).format('YYYY')) + ' ani'
   }
 
   buildPicturePath(url: any) {
-    let newUrl =url.slice(7)
+    let newUrl = url.slice(7)
     return `${environment.imageBaseUrl}/${newUrl}`
   }
 
@@ -91,7 +97,7 @@ export class AdoptComponent implements OnInit {
 
   onFilterDogs() {
     let tempArrayOfDogs = [...this.dogsModel.value.dogs]
-    
+
     if (this.filtersDog.name) {
       tempArrayOfDogs = tempArrayOfDogs.filter(dog => (dog.name || '').toLowerCase().includes(this.filtersDog.name.toLowerCase()))
     }
@@ -106,9 +112,9 @@ export class AdoptComponent implements OnInit {
 
   onResetSearch() {
     this.filtersDog = {
-		gender: '',
-		name: '',
-		size: '',
+      gender: '',
+      name: '',
+      size: '',
     }
     this.filteredDogsArray = [...this.dogsModel.value.dogs]
   }

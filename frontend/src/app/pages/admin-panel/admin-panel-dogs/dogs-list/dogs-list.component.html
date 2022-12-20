@@ -1,3 +1,5 @@
+<div class="container-fluid">
+</div>
 <div class="container">
 	<div class="row">
 		<div class="col">
@@ -6,10 +8,14 @@
 			</h2>
 		</div>
 		<div class="col">
-			<button type="button" style="float:right;margin-top:20px;color:white;background: #F17A32;border:none;cursor:pointer" class="btn btn-raised btn-primary" routerLink="/admin-panel-dashboard/create-dog"> +
+			<button type="button"
+				style="float:right;margin-top:20px;color:white;background: #F17A32;border:none;cursor:pointer"
+				class="btn btn-raised btn-primary" routerLink="/admin-panel-dashboard/create-dog"> +
 				Creează câine
 			</button>
-			<button type="button back-btn" style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer" class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
+			<button type="button back-btn"
+				style="float:right;margin-top:20px;margin-right:20px;color:white;background: #F17A32;border:none;cursor:pointer"
+				class="btn btn-raised btn-primary" (click)="onNavigateBack()"> &laquo;
 				Înapoi
 			</button>
 		</div>
@@ -21,16 +27,27 @@
 				<h5>{{dog?.name}}</h5>
 				<br />
 				<div class="picture-container">
+				
+					<ngb-carousel *ngIf="dog?.images?.length > 0">
+						<ng-template ngbSlide *ngFor="let image of dog?.images">
+							<div class="wrapper" ><!--  -->
+								<img src="{{buildPicturePath(image)}}" class="picture" alt="Random first slide"><!--  -->
+							</div>
+						</ng-template>
+					</ngb-carousel>
 					<img class="no-picture" *ngIf="!dog?.images?.length" src="../../../assets/No_image_available.png" />
-					<img class="picture" *ngIf="dog?.images?.length" src="{{buildPicturePath(dog.images[dog.images.length - 1])}}" />
+
 				</div>
 				<b>Sex:</b> {{dog?.gender || '-'}}
 				<b>Talie:</b> {{dog?.size || '-'}}
 				<div style="margin-top: 10px">
-					<button type="button back-btn" style="margin-right: 20px; color:white;background: #F17A32;border:none;cursor:pointer" class="btn btn-raised btn-primary" (click)="onNavigateToModifyPage(dog._id)">
+					<button type="button back-btn"
+						style="margin-right: 20px; color:white;background: #F17A32;border:none;cursor:pointer"
+						class="btn btn-raised btn-primary" (click)="onNavigateToModifyPage(dog._id)">
 						Modifică
 					</button>
-					<button class="btn btn-raised btn-danger" (click)="this.selectedDogID=dog?._id" data-bs-toggle="modal" data-bs-target="#deleteDogModal">
+					<button class="btn btn-raised btn-danger" (click)="this.selectedDogID=dog?._id"
+						data-bs-toggle="modal" data-bs-target="#deleteDogModal">
 						Șterge
 					</button>
 				</div>

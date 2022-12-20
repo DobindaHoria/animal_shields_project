@@ -112,7 +112,8 @@ export class CreateDogComponent implements OnInit {
 		
 		let createBody = {
 			...this.dogCreateBody,
-			birth_date: this.dogCreateBody.birth_date.year + '-' + this.makeItLegit(this.dogCreateBody.birth_date.month) + '-' + this.makeItLegit(this.dogCreateBody.birth_date.day)
+			birth_date: this.dogCreateBody.birth_date.year + '-' + this.makeItLegit(this.dogCreateBody.birth_date.month) + '-' + this.makeItLegit(this.dogCreateBody.birth_date.day),
+			language: this.language || 'ro'
 		}
 		
 		if (thumbnail[0].imageSrc) {

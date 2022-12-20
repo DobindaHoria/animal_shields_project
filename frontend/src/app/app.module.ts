@@ -33,6 +33,8 @@ import { UpdateArticleComponent } from './pages/admin-panel/admin-panel-blog/upd
 import { ArticleDetailsComponent } from './pages/article-details/article-details.component';
 import { AdoptComponent } from './pages/adopt/adopt.component';
 import { DonateComponent } from './pages/donate/donate.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { DonateComponent } from './pages/donate/donate.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    CarouselModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

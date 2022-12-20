@@ -38,10 +38,18 @@
 		</div>
 		<div class="col-8">
 			<div class="card profile-card">
-				<div class="row" *ngIf="this.dogByIDModel.value">
-					<div class="col-5">
-						<img class="no-picture" *ngIf="!this.dogByIDModel?.value?.dog?.images?.length" src="../../../assets/No_image_available.png" />
-						<img class="picture" *ngIf="this.dogByIDModel?.value?.dog?.images?.length" src="{{buildPicturePath(this.dogByIDModel?.value?.dog?.images[this.dogByIDModel?.value?.dog?.images?.length - 1])}}" />
+				<div class="row" >
+					<div class="col-5" *ngIf="this.dogByIDModel.value">
+						<ngb-carousel *ngIf="this.dogByIDModel?.value?.dog?.images?.length > 0">
+							<ng-template ngbSlide *ngFor="let image of this.dogByIDModel?.value?.dog?.images">
+								<div class="wrapper" >
+									<img src="{{buildPicturePath(image)}}" class="picture" alt="Random first slide">
+								</div>
+							</ng-template>
+						</ngb-carousel>
+
+						
+						<img class="no-picture" *ngIf="!this.dogByIDModel?.value?.dog?.images?.length && this.dogByIDModel.value" src="../../../assets/No_image_available.png" />
 					</div>
 					<div class="col-6" style="margin-left: 20px">
 						<h1><b>{{this.dogByIDModel?.value?.dog?.name}}</b></h1>

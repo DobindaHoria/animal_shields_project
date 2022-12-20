@@ -78,6 +78,10 @@ export class DogsDetailsComponent implements OnInit {
 		this.thumbnail = { imageFile: null, imageSrc: null, inputModel: null };
 	}
 
+	buildPicturePath(url: any) {
+		let newUrl = url.slice(7)
+		return `${environment.imageBaseUrl}/${newUrl}`
+	}
 
 	getImg() {
 		return this.thumbnail.imageSrc
@@ -118,12 +122,10 @@ export class DogsDetailsComponent implements OnInit {
 	}
 
 	getDogByID() {
-		return this.requestService.requestGet(`${environment.apiUrl}/dogs/${this.dogID}`, this.dogByIDModel, { "Authorization": `Bearer ${this.token}` }, () => {
+		return this.requestService.requestGet(`${environment.apiUrl}/dogs/${this.dogID}?language=${this.language}`, this.dogByIDModel, { "Authorization": `Bearer ${this.token}` }, () => {
 			if (this.dogByIDModel.value.dog) {
 				const formatedDate = moment(this.dogByIDModel.value.dog.birth_date).format('YYYY-MM-DD')
-				if (this.dogByIDModel.value.dog.images.length) {
-					this.thumbnail.imageSrc = environment.imageBaseUrl + this.dogByIDModel.value.dog.images[this.dogByIDModel.value.dog.images.length - 1];
-				}
+
 
 				this.dogUpdateBody = {
 					name: this.dogByIDModel.value.dog.name,
@@ -150,8 +152,11 @@ export class DogsDetailsComponent implements OnInit {
 
 		let updateBody = {
 			...this.dogUpdateBody,
-			birth_date: this.dogUpdateBody.birth_date.year + '-' + this.makeItLegit(this.dogUpdateBody.birth_date.month) + '-' + this.makeItLegit(this.dogUpdateBody.birth_date.day)
+			birth_date: this.dogUpdateBody.birth_date.year + '-' + this.makeItLegit(this.dogUpdateBody.birth_date.month) + '-' + this.makeItLegit(this.dogUpdateBody.birth_date.day),
+			language: this.language || 'ro'
 		}
+
+		console.log('thumbnail[0].imageSr', thumbnail[0].imageSrc);
 
 		if (thumbnail[0].imageSrc && thumbnail[0].imageFile) {
 
